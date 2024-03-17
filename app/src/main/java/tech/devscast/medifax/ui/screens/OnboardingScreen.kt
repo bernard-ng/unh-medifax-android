@@ -1,11 +1,8 @@
 package tech.devscast.medifax.ui.screens
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -22,10 +19,9 @@ import tech.devscast.medifax.R
 import tech.devscast.medifax.ui.theme.MedifaxTheme
 import tech.devscast.medifax.ui.theme.blackColor
 import tech.devscast.medifax.ui.theme.poppinsFontFamily
-import tech.devscast.medifax.ui.theme.primaryColor
 
 @Composable
-fun HealthcareScreen() {
+fun OnboardingScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -67,32 +63,26 @@ fun HealthcareScreen() {
         }
         Spacer(modifier = Modifier.height(48.dp))
         Surface(modifier = Modifier.width(300.dp)) {
-            Column {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Button(
                     onClick = {},
-                    shape = RoundedCornerShape(50.dp),
-                    border = BorderStroke(1.dp, primaryColor),
-                    colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
                         text = "Se connecter",
                         fontSize = 17.sp,
-                        modifier = Modifier.padding(10.dp)
+                        modifier = Modifier.padding(6.dp)
                     )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedButton(
                     onClick = {},
-                    shape = RoundedCornerShape(50.dp),
-                    border = BorderStroke(1.dp, primaryColor),
-                    colors = ButtonDefaults.buttonColors(contentColor = primaryColor, containerColor = Color.Transparent),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
                         text = "S'inscrire",
                         fontSize = 17.sp,
-                        modifier = Modifier.padding(10.dp)
+                        modifier = Modifier.padding(6.dp)
                     )
                 }
             }
@@ -104,6 +94,6 @@ fun HealthcareScreen() {
 @Composable
 fun PreviewHealthcareScreen() {
     MedifaxTheme {
-        HealthcareScreen()
+        OnboardingScreen()
     }
 }

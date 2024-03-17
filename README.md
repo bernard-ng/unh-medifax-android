@@ -4,6 +4,9 @@
 
 # Android Course Project
 
+TSHABU NGANDU BERNARD
+L3 Informatique
+
 ## Description
 Dans le domaine médical, la prise de rendez-vous est une étape cruciale pour assurer un
 suivi adéquat des patients. Toutefois, les méthodes traditionnelles de prise de rendez-vous,
@@ -23,7 +26,19 @@ cabinet médical.
 
 ## assignment 1
 
-<img src=".github/screenshots/onboarding_screen.png" width="200">&nbsp;
+code source : 
+- [SplashScreen.kt](app/src/main/java/tech/devscast/medifax/ui/screens/SplashScreen.kt)
+- [OnboardingScreen.kt](app/src/main/java/tech/devscast/medifax/ui/screens/OnboardingScreen.kt)
+
+
 <img src=".github/screenshots/splash_screen.png" width="200">&nbsp;
+<img src=".github/screenshots/onboarding_screen.png" width="200">&nbsp;
 
 ## assignment 2
+
+code source :
+- [EventHandlingScreen.kt](app/src/main/java/tech/devscast/medifax/ui/screens/EventHandlingScreen.kt)
+- [TouchDrawingScreen.kt](app/src/main/java/tech/devscast/medifax/ui/screens/TouchDrawingScreen.kt)
+
+<img src=".github/screenshots/event_handling.gif" width="200">&nbsp;
+<img src=".github/screenshots/touch_drawing.gif" width="200">&nbsp;
