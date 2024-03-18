@@ -5,6 +5,7 @@
 # Android Course Project
 
 TSHABU NGANDU BERNARD
+KAYOMBO KAKANGA Rusade
 L3 Informatique
 
 ## Description
