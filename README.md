@@ -4,8 +4,12 @@
 
 # Android Course Project
 
-TSHABU NGANDU BERNARD
-CANSA KAYEMBE AMAURY
+- TSHABU NGANDU BERNARD
+- KAYOMBO KAKANGA Rusade
+- KYANGWA NGONGA HENRIETTE
+- Mukena Bunda Othniel
+- CANSA KAYEMBE AMAURY
+
 L3 Informatique
 
 ## Description
