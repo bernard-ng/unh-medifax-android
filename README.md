@@ -5,6 +5,7 @@
 # Android Course Project
 
 TSHABU NGANDU BERNARD
+KYANGWA NGONGA HENRIETTE
 L3 Informatique
 
 ## Description
