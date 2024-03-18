@@ -8,6 +8,7 @@
 - KAYOMBO KAKANGA Rusade
 - KYANGWA NGONGA HENRIETTE
 - Mukena Bunda Othniel
+- CANSA KAYEMBE AMAURY
 
 L3 Informatique
 
