@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import tech.devscast.medifax.ui.screens.EventHandlingScreen
 import tech.devscast.medifax.ui.screens.OnboardingScreen
+import tech.devscast.medifax.ui.screens.SplashScreen
 import tech.devscast.medifax.ui.screens.TouchDrawingScreen
 import tech.devscast.medifax.ui.theme.MedifaxTheme
 
@@ -13,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MedifaxTheme {
-                EventHandlingScreen()
+                SplashScreen()
             }
         }
     }
