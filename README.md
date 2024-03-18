@@ -9,6 +9,7 @@
 - KYANGWA NGONGA HENRIETTE
 - Mukena Bunda Othniel
 - CANSA KAYEMBE AMAURY
+- Kinyanta Nkonkosha Daniel
 
 L3 Informatique
 
