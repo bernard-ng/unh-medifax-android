@@ -78,7 +78,7 @@ fun AppointmentScreen(onBackClicked: () -> Unit, onBookAppointment: () -> Unit) 
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.ic_doctor),
+                        painter = painterResource(id = R.drawable.doctor_svgrepo_com),
                         contentDescription = "Doctor Image",
                         modifier = Modifier
                             .size(100.dp)
@@ -89,7 +89,7 @@ fun AppointmentScreen(onBackClicked: () -> Unit, onBookAppointment: () -> Unit) 
                     Column {
                         Text(
                             text = "Dr. Amaury",
-                            style = MaterialTheme.typography.h6,
+                            style = MaterialTheme.typography.displayMedium,
                             color = Color.Black
                         )
                         Text(
@@ -156,7 +156,7 @@ fun PreviewAppointmentScreen() {
     MedifaxTheme {
         AppointmentScreen(
             onBackClicked = {},
-            onBookAppointment = { }
+            onBookAppointment = {}
         )
     }
 }

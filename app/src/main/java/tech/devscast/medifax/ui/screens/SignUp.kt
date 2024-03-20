@@ -161,7 +161,7 @@ fun SignUp(){
                 }
             }
 
-            Spacer(modifier = Modifier.height(180.dp))
+            Spacer(modifier = Modifier.height(185.dp))
 
             Surface (modifier = Modifier.width(300.dp)) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {

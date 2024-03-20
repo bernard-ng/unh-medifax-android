@@ -138,7 +138,7 @@ fun SignIn(){
             Text(
                 text = "OR"
             )
-            Spacer(modifier = Modifier.height(35.dp))
+            Spacer(modifier = Modifier.height(45.dp))
 
             Surface (modifier = Modifier.width(300.dp)) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
