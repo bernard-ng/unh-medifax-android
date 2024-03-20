@@ -1,4 +1,4 @@
-package tech.devscast.medifax.ui.screens
+package tech.devscast.medifax.ui.screens.assignment
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

@@ -1,4 +1,4 @@
-package tech.devscast.medifax.ui.screens
+package tech.devscast.medifax.ui.screens.assignment
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
