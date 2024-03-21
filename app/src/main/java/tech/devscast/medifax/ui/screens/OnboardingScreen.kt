@@ -34,14 +34,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 import tech.devscast.medifax.data.OnBoardingPage
 import tech.devscast.medifax.ui.theme.MedifaxTheme
+import tech.devscast.medifax.viewmodel.OnboardingViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnBoardingScreen(
-    onBoardingCompleted: () -> Unit = {}
+    onBoardingCompleted: () -> Unit = {},
+    viewModel: OnboardingViewModel
 ) {
     val pages = listOf(
         OnBoardingPage.Fist,
@@ -88,7 +91,10 @@ fun OnBoardingScreen(
             visible = pagerState.currentPage == pages.size - 1
         ) {
             Button(
-                onClick = { onBoardingCompleted() },
+                onClick = {
+                    onBoardingCompleted()
+                    viewModel.saveOnBoardingState(true)
+                },
                 shape = MaterialTheme.shapes.medium,
             ) {
                 Text(text = "Commencer", modifier = Modifier.padding(6.dp))
@@ -141,6 +147,6 @@ fun PagerScreen(page: OnBoardingPage, state: PagerState) {
 @Composable
 fun PreviewOnBoardingScreen() {
     MedifaxTheme {
-        OnBoardingScreen()
+        //OnBoardingScreen()
     }
 }

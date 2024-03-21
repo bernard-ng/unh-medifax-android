@@ -1,6 +1,7 @@
 package tech.devscast.medifax.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,6 +11,7 @@ import tech.devscast.medifax.ui.screens.HomeScreen
 import tech.devscast.medifax.ui.screens.OnBoardingScreen
 import tech.devscast.medifax.ui.screens.SignInScreen
 import tech.devscast.medifax.ui.screens.SignUpScreen
+import tech.devscast.medifax.viewmodel.OnboardingViewModel
 
 @Composable
 fun SetupNavGraph(
@@ -21,7 +23,9 @@ fun SetupNavGraph(
         startDestination = startDestination
     ) {
         composable(route = Destination.OnBoarding.route) {
+            val viewModel: OnboardingViewModel = hiltViewModel()
             OnBoardingScreen(
+                viewModel = viewModel,
                 onBoardingCompleted = {
                     navController.popBackStack()
                     navController.navigate(Destination.GetStarted.route)

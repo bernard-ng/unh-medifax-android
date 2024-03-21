@@ -1,34 +1,36 @@
 package tech.devscast.medifax
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import tech.devscast.medifax.navigation.Destination
 import tech.devscast.medifax.navigation.SetupNavGraph
 import tech.devscast.medifax.ui.theme.MedifaxTheme
-import tech.devscast.medifax.viewmodel.SplashViewModel
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val splashViewModel by viewModels<SplashViewModel>()
+    @Inject
+    lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
-        installSplashScreen().setKeepOnScreenCondition {
-            splashViewModel.isLoading.value
-        }
 
         setContent {
             MedifaxTheme {
-                val screen by splashViewModel.startDestination
+                val isCompleted = preferences.getBoolean("completed", false)
+                val startDestination = if (isCompleted) Destination.Home.route else Destination.OnBoarding.route
                 val navController = rememberNavController()
-                SetupNavGraph(navController = navController, startDestination = screen)
+                SetupNavGraph(
+                    navController = navController,
+                    startDestination = startDestination,
+                )
             }
         }
     }

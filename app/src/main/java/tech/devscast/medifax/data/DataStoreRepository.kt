@@ -15,7 +15,10 @@ import javax.inject.Inject
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "on_boarding_preferences")
 
-class DataStoreRepository @Inject constructor(context: Context) {
+
+class DataStoreRepository @Inject constructor(
+    context: Context
+) {
 
     private object PreferencesKey {
         val onBoardingKey = booleanPreferencesKey(name = "on_boarding_completed")
