@@ -45,3 +45,16 @@ code source :
 
 <img src=".github/screenshots/event_handling.gif" width="200">&nbsp;
 <img src=".github/screenshots/touch_drawing.gif" width="200">&nbsp;
+
+# assignment 3
+
+## camera
+
+code source : 
+- [AndroidManifest.xml](app/src/main/AndroidManifest.xml)
+- [CameraActivity.kt](app/src/main/java/tech/devscast/medifax/CameraActivity.kt)
+- [CameraScreen.kt](app/src/main/java/tech/devscast/medifax/ui/screens/assignment/CameraScreen.kt)
+
+<img src=".github/screenshots/camera_1.png" width="200">&nbsp;
+<img src=".github/screenshots/camera_2.png" width="200">&nbsp;
+<img src=".github/screenshots/camera_3.png" width="200">&nbsp;
