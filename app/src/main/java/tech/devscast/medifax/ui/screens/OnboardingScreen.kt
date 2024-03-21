@@ -69,7 +69,13 @@ fun OnBoardingScreen() {
         ) {
             PagerIndicator(state = pagerState)
             AnimatedVisibility(pagerState.currentPage < pagerState.pageCount - 1) {
-                FilledIconButton(onClick = { pagerScrollScope.launch { pagerState.scrollBy(100f) } }) {
+                FilledIconButton(
+                    onClick = {
+                        pagerScrollScope.launch {
+                            pagerState.scrollToPage(pagerState.currentPage + 1)
+                        }
+                    }
+                ) {
                     Icon(Icons.Default.ChevronRight, contentDescription = "Suivant")
                 }
             }

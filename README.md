@@ -30,15 +30,12 @@ une utilisation plus efficace des ressources et une amélioration de la producti
 cabinet médical.
 
 
-## assignment 1
-
-code source : 
-- [SplashScreen.kt](app/src/main/java/tech/devscast/medifax/ui/screens/SplashScreen.kt)
-- [OnboardingScreen.kt](app/src/main/java/tech/devscast/medifax/ui/screens/OnboardingScreen.kt)
-
+## Screenshots
 
 <img src=".github/screenshots/splash_screen.png" width="200">&nbsp;
-<img src=".github/screenshots/onboarding_screen.png" width="200">&nbsp;
+<img src=".github/screenshots/onboarding_screen_1.png" width="200">&nbsp;
+<img src=".github/screenshots/onboarding_screen_2.png" width="200">&nbsp;
+<img src=".github/screenshots/signup_screen.png" width="200">&nbsp;
 
 ## assignment 2
 
