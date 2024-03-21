@@ -35,7 +35,6 @@ class CameraActivity : ComponentActivity() {
     @OptIn(ExperimentalCoilApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen()
 
         setContent {
             MedifaxTheme {

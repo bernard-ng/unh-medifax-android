@@ -43,7 +43,10 @@ import tech.devscast.medifax.ui.theme.MedifaxTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppointmentScreen(onBackClicked: () -> Unit, onBookAppointment: () -> Unit) {
+fun AppointmentScreen(
+    onBackClicked: () -> Unit  = {},
+    onBookAppointment: () -> Unit = {}
+) {
     var email by remember { mutableStateOf("") }
 
     Scaffold(

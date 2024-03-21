@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,7 +40,9 @@ import tech.devscast.medifax.ui.theme.MedifaxTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(
+    onBoardingCompleted: () -> Unit = {}
+) {
     val pages = listOf(
         OnBoardingPage.Fist,
         OnBoardingPage.Second
@@ -87,7 +88,7 @@ fun OnBoardingScreen() {
             visible = pagerState.currentPage == pages.size - 1
         ) {
             Button(
-                onClick = { },
+                onClick = { onBoardingCompleted() },
                 shape = MaterialTheme.shapes.medium,
             ) {
                 Text(text = "Commencer", modifier = Modifier.padding(6.dp))
