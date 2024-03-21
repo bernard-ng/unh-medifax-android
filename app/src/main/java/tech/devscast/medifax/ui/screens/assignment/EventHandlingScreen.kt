@@ -51,10 +51,12 @@ fun EventHandlingScreen(modifier: Modifier = Modifier) {
             Box(
                 modifier = Modifier.padding(20.dp),
             ) {
-                Text(
-                    text = text,
-                    modifier = modifier
-                )
+                Box {
+                    Text(
+                        text = text,
+                        modifier = modifier
+                    )
+                }
             }
             CustomButton(
                 onClick = { text = "Button clicked" },
