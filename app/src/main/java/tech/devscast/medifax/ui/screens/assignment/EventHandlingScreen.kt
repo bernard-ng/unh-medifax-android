@@ -1,4 +1,4 @@
-package tech.devscast.medifax.ui.screens
+package tech.devscast.medifax.ui.screens.assignment
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi

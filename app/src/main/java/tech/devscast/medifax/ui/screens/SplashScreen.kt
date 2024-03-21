@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import tech.devscast.medifax.R
+import tech.devscast.medifax.ui.components.LogoText
 import tech.devscast.medifax.ui.theme.MedifaxTheme
 import tech.devscast.medifax.ui.theme.poppinsFontFamily
 
@@ -34,19 +35,7 @@ fun SplashScreen() {
            horizontalAlignment = Alignment.CenterHorizontally,
            verticalArrangement = Arrangement.Center
        ) {
-           Image(
-               painter = painterResource(id = R.drawable.medifax_icon),
-               contentDescription = "Healthcare Logo",
-               modifier = Modifier.size(120.dp)
-           )
-           Spacer(modifier = Modifier.height(8.dp))
-           Text(
-               text = "Medifax",
-               fontWeight = FontWeight.Medium,
-               fontFamily = poppinsFontFamily,
-               fontSize = 30.sp,
-               color = Color(0xFF223A6A)
-           )
+           LogoText()
        }
    }
 }
