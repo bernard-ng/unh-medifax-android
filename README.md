@@ -11,7 +11,7 @@
 - CANSA KAYEMBE AMAURY
 - Kinyanta Nkonkosha Daniel
 
-L3 Informatique○c
+L3 Informatique
 
 ## Description
 Dans le domaine médical, la prise de rendez-vous est une étape cruciale pour assurer un
