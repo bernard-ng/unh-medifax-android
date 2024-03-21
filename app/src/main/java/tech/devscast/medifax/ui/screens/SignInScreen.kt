@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -56,17 +57,7 @@ fun SignInScreen(){
                     TextField(
                         value = email.value,
                         onValueChange = { email.value = it },
-                        label = {
-                            Row (verticalAlignment = Alignment.CenterVertically){
-                                androidx.compose.foundation.Image(
-                                    painter = painterResource(id = R.drawable.email),
-                                    contentDescription = "Email Icon",
-                                    modifier = Modifier.size(24.dp)
-                                )
-                                Text("    Enter your email")
-
-                            }
-                        },
+                        label = { Text("Enter your email") },
                         modifier = Modifier.width(350.dp)
 
                     )
@@ -76,18 +67,8 @@ fun SignInScreen(){
                         onValueChange = { password.value = it },
                         label = {
                             Row (verticalAlignment = Alignment.CenterVertically){
-                                androidx.compose.foundation.Image(
-                                    painter = painterResource(id = R.drawable.icons8_password),
-                                    contentDescription = "Password Icon"
-                                )
                                 Text("    Enter your password")
                                 Spacer(modifier = Modifier.weight(1f))
-                                androidx.compose.foundation.Image(
-                                    painter = painterResource(id = R.drawable.eye_slash__1_),
-                                    contentDescription = "Eye slash Icon"
-
-                                )
-
                             }
                         },
                         modifier = Modifier.width(350.dp),

@@ -35,7 +35,11 @@ fun SplashScreen() {
            horizontalAlignment = Alignment.CenterHorizontally,
            verticalArrangement = Arrangement.Center
        ) {
-           LogoText()
+           Image(
+               painter = painterResource(id = R.drawable.medifax_icon),
+               contentDescription = "Medifax Logo",
+               modifier = Modifier.size(120.dp)
+           )
        }
    }
 }
