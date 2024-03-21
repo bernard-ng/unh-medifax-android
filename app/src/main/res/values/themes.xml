@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Theme.MySplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/medifax_icon</item>
+        <item name="postSplashScreenTheme">@style/Theme.Medifax</item>
+    </style>
 
     <style name="Theme.Medifax" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
