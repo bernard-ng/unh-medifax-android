@@ -26,7 +26,10 @@ import tech.devscast.medifax.ui.theme.poppinsFontFamily
 
 
 @Composable
-fun GetStartedScreen() {
+fun GetStartedScreen(
+    onSignInClick: () -> Unit,
+    onSignUpClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -58,7 +61,7 @@ fun GetStartedScreen() {
         Spacer(modifier = Modifier.height(48.dp))
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Button(
-                onClick = {},
+                onClick = { onSignInClick() },
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.medium
             ) {
@@ -70,7 +73,7 @@ fun GetStartedScreen() {
             }
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedButton(
-                onClick = {},
+                onClick = { onSignUpClick() },
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.medium
             ) {
@@ -88,6 +91,6 @@ fun GetStartedScreen() {
 @Composable
 fun PreviewGetStartedScreen() {
     MedifaxTheme {
-        GetStartedScreen()
+        GetStartedScreen({}, {})
     }
 }

@@ -33,7 +33,10 @@ fun SetupNavGraph(
             )
         }
         composable(route = Destination.GetStarted.route) {
-            GetStartedScreen()
+            GetStartedScreen(
+                onSignInClick = { navController.navigate(Destination.SignIn.route) },
+                onSignUpClick = { navController.navigate(Destination.SignUp.route) }
+            )
         }
         composable(route = Destination.SignIn.route) {
             SignInScreen()
