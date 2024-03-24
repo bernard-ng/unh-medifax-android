@@ -34,6 +34,7 @@ class CameraActivity : ComponentActivity() {
 
     @OptIn(ExperimentalCoilApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
 
         setContent {
