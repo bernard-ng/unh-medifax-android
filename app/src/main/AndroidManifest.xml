@@ -7,8 +7,8 @@
     <uses-feature android:name="android.hardware.camera.any" />
 
     <application
-        android:allowBackup="true"
         android:name=".MedifaxApplication"
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -18,8 +18,15 @@
         android:theme="@style/Theme.MedifaxSplashScreen"
         tools:targetApi="31">
         <activity
+            android:name=".AssignmentActivity"
+            android:exported="true"
+            android:label="@string/title_activity_assignment"
+            android:theme="@style/Theme.MedifaxSplashScreen" />
+        <activity
             android:name=".CameraActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label="CameraActivity"
+            android:theme="@style/Theme.MedifaxSplashScreen" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
