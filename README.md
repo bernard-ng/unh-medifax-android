@@ -46,7 +46,7 @@ code source :
 <img src=".github/screenshots/event_handling.gif" width="200">&nbsp;
 <img src=".github/screenshots/touch_drawing.gif" width="200">&nbsp;
 
-# assignment 3
+## assignment 3
 
 ## camera
 
@@ -58,3 +58,8 @@ code source :
 <img src=".github/screenshots/camera_1.png" width="200">&nbsp;
 <img src=".github/screenshots/camera_2.png" width="200">&nbsp;
 <img src=".github/screenshots/camera_3.png" width="200">&nbsp;
+
+## assignment 4
+
+<img src=".github/screenshots/navigation.gif" width="200">&nbsp;
+<img src=".github/screenshots/navigation_drawer.gif" width="200">&nbsp;
