@@ -31,7 +31,9 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -69,7 +71,7 @@ import tech.devscast.medifax.ui.theme.MedifaxTheme
 
 class AssignmentActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        // installSplashScreen()
+        installSplashScreen()
 
         super.onCreate(savedInstanceState)
         setContent {
@@ -146,55 +148,6 @@ data class Country(
     val flag: String,
     val population: Int
 )
-
-@Composable
-fun CountryItem(country: Country) {
-    val context = LocalContext.current
-
-    Box (
-        modifier = Modifier
-            .clickable(
-                onClick = {
-                    Toast.makeText(context, "Population : ${country.population}", Toast.LENGTH_SHORT).show()
-                },
-                interactionSource = remember { MutableInteractionSource() },
-                indication = rememberRipple(),
-            )
-    ) {
-        Row (
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start,
-        ) {
-            AsyncImage(
-                country.flag,
-                contentDescription = country.name,
-                modifier = Modifier
-                    .size(80.dp)
-                    .align(Alignment.CenterVertically)
-                    .padding(start = 10.dp)
-            )
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Text(
-                    text = country.name,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 30.sp,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp)
-                )
-                Text(
-                    text = "Population : ${country.population.toString()}",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp)
-                )
-            }
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -302,6 +255,7 @@ fun ViewA(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        val context = LocalContext.current
         val items = listOf(
             Country("CD", "RD Congo", "https://flagsapi.com/CD/flat/64.png", 2000),
             Country("US", "United States", "https://flagsapi.com/US/flat/64.png", 1000),
@@ -309,21 +263,70 @@ fun ViewA(
             Country("SA", "South Africa", "https://flagsapi.com/ZA/flat/64.png", 2000)
         )
 
-        LazyColumn {
+        LazyColumn (
+            modifier = Modifier.padding(20.dp)
+        ) {
             items(items) {country ->
-                CountryItem(country)
+                ElevatedCard (
+                    modifier = Modifier
+                        .clickable(
+                            onClick = {
+                                Toast.makeText(context, "Population : ${country.population}", Toast.LENGTH_SHORT).show()
+                            },
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = rememberRipple(),
+                        )
+                ) {
+                    Row (
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Start,
+                    ) {
+                        AsyncImage(
+                            country.flag,
+                            contentDescription = country.name,
+                            modifier = Modifier
+                                .size(80.dp)
+                                .align(Alignment.CenterVertically)
+                                .padding(start = 10.dp)
+                        )
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        ) {
+                            Text(
+                                text = country.name,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 30.sp,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp)
+                            )
+                            Text(
+                                text = "Population : ${country.population.toString()}",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp)
+                            )
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(20.dp))
             }
         }
         Spacer(modifier = Modifier.weight(1f))
-        Button(
-            onClick = { onButtonClick() },
-            modifier = Modifier.fillMaxWidth(),
-            shape = MaterialTheme.shapes.medium
+        Box (
+            modifier = Modifier.padding(10.dp),
         ) {
-            Text(
-                text = "Visit View B",
-                modifier = Modifier.padding(8.dp)
-            )
+            Button(
+                onClick = { onButtonClick() },
+                modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.medium
+            ) {
+                Text(
+                    text = "Visit View B",
+                    modifier = Modifier.padding(8.dp)
+                )
+            }
         }
     }
 }
@@ -342,9 +345,12 @@ fun ViewB(
     ) {
         Button(
             onClick = { onButtonClick() },
+            shape = MaterialTheme.shapes.medium,
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text(
                 text = "Visit View A",
+                modifier = Modifier.padding(8.dp)
             )
         }
     }
