@@ -4,357 +4,266 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Flag
+import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.DrawerValue
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Web
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
-import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import tech.devscast.medifax.model.assignment.ScheduleCollection
+import tech.devscast.medifax.model.assignment.ScheduleItem
+import tech.devscast.medifax.model.assignment.Teacher
 import tech.devscast.medifax.ui.theme.MedifaxTheme
+import tech.devscast.medifax.ui.theme.poppinsFontFamily
+import tech.devscast.medifax.utils.ReadJSONFromAssets
 
 class AssignmentActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
         setContent {
+            val context = LocalContext.current
             val navController = rememberNavController()
+            val screens = listOf(
+                Screen.Schedule,
+                Screen.Teacher,
+            )
 
             MedifaxTheme {
-                val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-                val scope = rememberCoroutineScope()
-                val title = remember { mutableStateOf("Medifax") }
 
-                ModalNavigationDrawer(
-                    drawerState = drawerState,
-                    drawerContent = {
-                        ModalDrawerSheet {
-                            DrawerHeader()
-                            DrawerBody(
-                                items = listOf(
-                                    MenuItem(
-                                        id = "A",
-                                        title = "View A",
-                                        contentDescription = "Go to view A screen",
-                                        icon = Icons.Default.Home
-                                    ),
-                                    MenuItem(
-                                        id = "B",
-                                        title = "View B",
-                                        contentDescription = "Go to view B screen",
-                                        icon = Icons.Default.Settings
-                                    )
-                                ),
-                                onItemClick = {
-                                    navController.navigate(it.id)
-                                    title.value = it.title
-                                }
+                context.assets.open("json.json")
+                val scheduleCollection: ScheduleCollection = Json.decodeFromString<ScheduleCollection>(
+                    ReadJSONFromAssets(context, "json.json")
+                )
+
+                Scaffold (
+                    topBar = {
+                        TopAppBar(
+                            title = { Text(text = scheduleCollection.title) },
+                            colors = topAppBarColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer
                             )
-                        }
+                        )
                     },
-                ) {
-                    Scaffold(
-                        topBar = {
-                            AppBar(
-                                onNavigationIconClick = {
-                                    scope.launch {
-                                        if (drawerState.isOpen) drawerState.close() else drawerState.open()
-                                    }
-                                },
-                                title = title.value
-                            )
-                        }
-                    ) {innerPadding ->
-                        SetupNavGraph(
-                            navController = navController,
-                            startDestination = "A",
-                            padding = innerPadding
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-data class MenuItem(
-    val id: String,
-    val title: String,
-    val contentDescription: String,
-    val icon: ImageVector
-)
-
-data class Country(
-    val id: String,
-    val name: String,
-    val flag: String,
-    val population: Int
-)
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AppBar(
-    onNavigationIconClick: () -> Unit,
-    title: String
-) {
-    TopAppBar(
-        title = {
-            Text(text = title)
-        },
-        navigationIcon = {
-            IconButton(onClick = onNavigationIconClick) {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = "Toggle drawer"
-                )
-            }
-        },
-        colors = topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        )
-    )
-}
-
-@Composable
-fun DrawerHeader() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 64.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = "Header", fontSize = 60.sp)
-    }
-}
-
-@Composable
-fun DrawerBody(
-    items: List<MenuItem>,
-    modifier: Modifier = Modifier,
-    itemTextStyle: TextStyle = TextStyle(fontSize = 18.sp),
-    onItemClick: (MenuItem) -> Unit
-) {
-    LazyColumn(modifier) {
-       items(items) {item ->
-           Row(
-               modifier = Modifier
-                   .fillMaxWidth()
-                   .clickable {
-                       onItemClick(item)
-                   }
-                   .padding(16.dp)
-           ) {
-               Icon(
-                   imageVector = item.icon,
-                   contentDescription = item.contentDescription
-               )
-               Spacer(modifier = Modifier.width(16.dp))
-               Text(
-                   text = item.title,
-                   style = itemTextStyle,
-                   modifier = Modifier.weight(1f)
-               )
-           }
-       }
-    }
-}
-
-@Composable
-fun SetupNavGraph(
-    navController: NavHostController,
-    startDestination: String,
-    padding: PaddingValues
-) {
-    NavHost(navController = navController, startDestination = startDestination) {
-        composable("A") {
-            ViewA(
-                onButtonClick = {
-                    navController.navigate("B")
-                },
-                padding
-            )
-        }
-        composable("B") {
-            ViewB(
-                onButtonClick = {
-                    navController.navigate("A")
-                },
-                padding
-            )
-        }
-    }
-}
-
-@Composable
-fun ViewA(
-    onButtonClick: () -> Unit,
-    padding: PaddingValues
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(padding),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        val context = LocalContext.current
-        val items = listOf(
-            Country("CD", "RD Congo", "https://flagsapi.com/CD/flat/64.png", 2000),
-            Country("US", "United States", "https://flagsapi.com/US/flat/64.png", 1000),
-            Country("BE", "Belgium", "https://flagsapi.com/BE/flat/64.png", 2000),
-            Country("SA", "South Africa", "https://flagsapi.com/ZA/flat/64.png", 2000)
-        )
-
-        LazyColumn (
-            modifier = Modifier.padding(20.dp)
-        ) {
-            items(items) {country ->
-                ElevatedCard (
-                    modifier = Modifier
-                        .clickable(
-                            onClick = {
-                                Toast.makeText(context, "Population : ${country.population}", Toast.LENGTH_SHORT).show()
+                    bottomBar = {
+                        BottomAppBar (
+                            actions = {
+                                IconButton(onClick = { navController.navigate(Screen.Schedule.route) }) {
+                                    Icon(Screen.Schedule.icon, contentDescription = "Schedule")
+                                }
+                                IconButton(onClick = { navController.navigate(Screen.Teacher.route) }) {
+                                    Icon(Screen.Teacher.icon, contentDescription = "Teacher")
+                                }
                             },
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(),
+                            floatingActionButton = {},
                         )
-                ) {
-                    Row (
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start,
-                    ) {
-                        AsyncImage(
-                            country.flag,
-                            contentDescription = country.name,
-                            modifier = Modifier
-                                .size(80.dp)
-                                .align(Alignment.CenterVertically)
-                                .padding(start = 10.dp)
-                        )
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                        ) {
-                            Text(
-                                text = country.name,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 30.sp,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(10.dp)
-                            )
-                            Text(
-                                text = "Population : ${country.population.toString()}",
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(10.dp)
-                            )
-                        }
+                    }
+                ) { innerPadding ->
+                    NavHost(navController, startDestination = Screen.Schedule.route, Modifier.padding(innerPadding)) {
+                        composable(Screen.Schedule.route) { ScheduleScreen(scheduleCollection.data) }
+                        composable(Screen.Teacher.route) { TeacherScreen(scheduleCollection.teachers) }
                     }
                 }
-                Spacer(modifier = Modifier.height(20.dp))
             }
         }
-        Spacer(modifier = Modifier.weight(1f))
-        Box (
-            modifier = Modifier.padding(10.dp),
+    }
+}
+
+sealed class Screen(val route: String, val icon: ImageVector) {
+    object Schedule : Screen("schedule", Icons.Filled.CalendarMonth)
+    object Teacher : Screen("teacher", Icons.Filled.Person)
+}
+
+@Composable
+fun TeacherScreen(
+    items: List<Teacher>,
+) {
+    LazyColumn {
+        items(items) {
+            TeacherItem(teacher = it)
+            Spacer(modifier = Modifier.height(5.dp))
+        }
+    }
+}
+
+@Composable
+fun TeacherItem(teacher: Teacher) {
+    val context = LocalContext.current
+
+    ElevatedCard {
+        Column (
+            modifier = Modifier
+                .padding(10.dp)
+                .fillMaxWidth()
         ) {
-            Button(
-                onClick = { onButtonClick() },
-                modifier = Modifier.fillMaxWidth(),
-                shape = MaterialTheme.shapes.medium
-            ) {
+            AsyncImage(
+                teacher.photo,
+                contentDescription = teacher.displayName,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(90.dp)
+                    .clip(CircleShape)
+            )
+            Column {
                 Text(
-                    text = "Visit View B",
-                    modifier = Modifier.padding(8.dp)
+                    text = teacher.displayName,
+                    fontSize = 15.sp,
+                    fontFamily = poppinsFontFamily,
+                    fontWeight = FontWeight.Black
                 )
+                Text(text = teacher.title)
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+            Column {
+                Row (
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(Icons.Filled.Email, contentDescription = "email")
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Text(text = teacher.mail)
+                }
+                Row (
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(Icons.Filled.Phone, contentDescription = "phone")
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Text(text = teacher.telephoneNumber)
+                }
+                Row (
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(Icons.Filled.Home, contentDescription = "office")
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Text(text = teacher.office)
+                }
+                Row (
+                    horizontalArrangement = Arrangement.Start,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(Icons.Filled.Web, contentDescription = "url")
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Text(text = teacher.url)
+                }
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            LazyRow {
+                items(teacher.affiliations) {
+                    SuggestionChip(onClick = { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }, label = { Text(text = it) })
+                }
             }
         }
     }
 }
 
 @Composable
-fun ViewB(
-    onButtonClick: () -> Unit,
-    padding: PaddingValues
+fun ScheduleScreen(
+    items: List<ScheduleItem>,
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(padding),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Button(
-            onClick = { onButtonClick() },
-            shape = MaterialTheme.shapes.medium,
-            modifier = Modifier.fillMaxWidth()
+    LazyColumn {
+        items(items) {
+            ScheduleItemView(scheduleItem = it)
+            Spacer(modifier = Modifier.height(5.dp))
+        }
+    }
+}
+
+@Composable
+fun ScheduleItemView(scheduleItem: ScheduleItem) {
+    val context = LocalContext.current
+
+    ElevatedCard {
+        Column(
+            modifier = Modifier
+                .padding(10.dp)
+                .fillMaxWidth()
         ) {
             Text(
-                text = "Visit View A",
-                modifier = Modifier.padding(8.dp)
+                text = scheduleItem.subject,
+                fontSize = 30.sp,
+                fontFamily = poppinsFontFamily,
+                fontWeight = FontWeight.Black
             )
+            Row (
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = scheduleItem.start)
+                Text(text = scheduleItem.end)
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = scheduleItem.room)
+            Text(text = scheduleItem.teacherAbbreviation)
+            Text(text = scheduleItem.description)
+
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = scheduleItem.hoursMask.toString())
+
+            LazyRow (
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                items(scheduleItem.classes) {
+                    SuggestionChip(onClick = { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }, label = { Text(text = it) })
+                }
+            }
         }
     }
 }
+
 
 @Preview(showBackground = true, showSystemUi = false)
 @Composable
