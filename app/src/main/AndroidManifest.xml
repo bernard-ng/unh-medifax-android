@@ -6,6 +6,9 @@
 
     <uses-feature android:name="android.hardware.camera.any" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:name=".MedifaxApplication"
         android:allowBackup="true"
@@ -17,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedifaxSplashScreen"
         tools:targetApi="31">
+
+        <service android:name=".ScheduleCheckService"/>
+
         <activity
             android:name=".AssignmentActivity"
             android:exported="true"

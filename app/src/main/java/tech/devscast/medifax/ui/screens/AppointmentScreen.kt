@@ -57,9 +57,7 @@ fun AppointmentScreen(
                     IconButton(onClick = onBackClicked) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
                     }
-                },
-                //backgroundColor = Color.White,
-               // elevation = 0.dp
+                }
             )
         },
         floatingActionButton = {
@@ -96,7 +94,7 @@ fun AppointmentScreen(
                             color = Color.Black
                         )
                         Text(
-                            text = "Cardiologist",
+                            text = "doctorSpecialty",
                             style = MaterialTheme.typography.headlineLarge,
                             color = Color.Gray
                         )
@@ -107,13 +105,13 @@ fun AppointmentScreen(
                                 tint = Color.Yellow
                             )
                             Text(
-                                text = "4.7",
+                                text = "doctorRating".toString(),
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = Color.Black
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(
-                                text = "800m away",
+                                text = "${"octorDistance"}m away",
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = Color.Black
                             )
@@ -131,7 +129,7 @@ fun AppointmentScreen(
                         color = Color.Black
                     )
                     Text(
-                        text = "no text",
+                        text = "No text", // Remplacez cela par une description réelle du médecin
                         style = MaterialTheme.typography.bodyLarge,
                         color = Color.Gray
                     )
@@ -142,8 +140,7 @@ fun AppointmentScreen(
                 OutlinedTextField(
                     value = email,
                     onValueChange = { newEmail -> email = newEmail },
-                    label = {
-                        Text(text="Enter your email") },
+                    label = { Text("Enter your email") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)

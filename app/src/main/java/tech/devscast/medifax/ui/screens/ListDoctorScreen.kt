@@ -170,15 +170,16 @@ fun DoctorItem(
     distance: Float,
     imageResourceId: Int,
     rating: Double,
-    brush: Brush
+    brush: Brush,
 ) {
-
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
             .border(width = 1.dp, color = Color.LightGray)
+            //.clickable {
+            //navController.navigate("appointmentScreen/$name")
+           // }
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Image(
