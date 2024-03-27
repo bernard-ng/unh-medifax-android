@@ -38,6 +38,8 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import androidx.camera.core.Preview as AndroidxCameraCorePreview
 
+
+
 @Composable
 fun CameraScreen(
     outputDirectory: File,

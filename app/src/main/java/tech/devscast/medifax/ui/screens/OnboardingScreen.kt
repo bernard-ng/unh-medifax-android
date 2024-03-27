@@ -34,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 import tech.devscast.medifax.data.OnBoardingPage
 import tech.devscast.medifax.ui.theme.MedifaxTheme
@@ -146,6 +147,6 @@ fun PagerScreen(page: OnBoardingPage, state: PagerState) {
 @Composable
 fun PreviewOnBoardingScreen() {
     MedifaxTheme {
-        //OnBoardingScreen({})
+        //OnBoardingScreen()
     }
 }

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
 
     id("com.google.dagger.hilt.android")
+    kotlin("plugin.serialization") version "1.9.23"
 }
 
 android {
@@ -88,6 +89,7 @@ dependencies {
     implementation(libs.hilt.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.android.compiler)
+    implementation(libs.kotlinx.serialization.json)
 }
 
 kapt {

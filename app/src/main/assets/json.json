@@ -1,0 +1,619 @@
+{
+  "title": "Teachers, Teacher T.",
+  "data": [
+    {
+      "classes": [
+        "EI4S2"
+      ],
+      "room": "R1_2.86",
+      "subject": "andr1",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-26T10:30:00",
+      "end": "2016-09-26T12:00:00",
+      "uid": "06bc8207-4095-46e9-a073-58adccbe2490",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI2B",
+        "EI2S1",
+        "EI2S2",
+        "EI2T"
+      ],
+      "room": "R1_2.40",
+      "subject": "proP",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-26T12:45:00",
+      "end": "2016-09-26T14:15:00",
+      "uid": "fdfaeb14-e986-4e2a-a8b0-9bf7421a1da7",
+      "hoursMask": 96,
+      "description": "b/zw",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI2B",
+        "EI2S1",
+        "EI2S2",
+        "EI2T"
+      ],
+      "room": "R1_2.40",
+      "subject": "proP",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-26T14:30:00",
+      "end": "2016-09-26T16:00:00",
+      "uid": "bc9604dc-112b-4775-8c08-3c5ec887c085",
+      "hoursMask": 384,
+      "description": "b/zw",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI7"
+      ],
+      "room": "R1_2.72",
+      "subject": "dpr",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-27T10:30:00",
+      "end": "2016-09-27T12:00:00",
+      "uid": "10ab569d-cbd7-49e6-aa05-1cee4ece6123",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-21T18:12:05.5"
+    },
+    {
+      "classes": [
+        "EI7"
+      ],
+      "room": "R1_2.70",
+      "subject": "dpr",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-28T08:45:00",
+      "end": "2016-09-28T10:15:00",
+      "uid": "5d0575a4-42c6-4feb-810b-d56a90d9dd50",
+      "hoursMask": 3,
+      "description": "t/p",
+      "updatedAt": "2016-08-29T19:12:05.933"
+    },
+    {
+      "classes": [
+        "EI3S3"
+      ],
+      "room": "R1_2.84",
+      "subject": "web3",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-28T12:45:00",
+      "end": "2016-09-28T14:15:00",
+      "uid": "b85dbcb7-c558-4999-8e89-71ae91bc48c9",
+      "hoursMask": 96,
+      "description": "t/p",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI1A"
+      ],
+      "room": "R1_2.43",
+      "subject": "edb1/2",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-28T14:30:00",
+      "end": "2016-09-28T16:00:00",
+      "uid": "cfb97927-5e88-437e-a2cd-1e39e0cd8a6c",
+      "hoursMask": 384,
+      "description": "t/p",
+      "updatedAt": "2016-07-04T18:32:05.667"
+    },
+    {
+      "classes": [
+        "EI4S2"
+      ],
+      "room": "R1_2.84",
+      "subject": "andr1",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-29T10:30:00",
+      "end": "2016-09-29T12:00:00",
+      "uid": "ab485ac2-e5bf-4674-b86c-a2b0d9930078",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-21T18:12:05.5"
+    },
+    {
+      "classes": [
+        "EI1A"
+      ],
+      "room": "R1_2.43",
+      "subject": "edb1/2",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-29T14:30:00",
+      "end": "2016-09-29T16:00:00",
+      "uid": "804cb83d-ede8-4ee8-ae7b-d7257eb79778",
+      "hoursMask": 384,
+      "description": "t/p",
+      "updatedAt": "2016-07-04T18:32:05.667"
+    },
+    {
+      "classes": [
+        "EI3S3"
+      ],
+      "room": "R1_2.72",
+      "subject": "web3",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-30T08:45:00",
+      "end": "2016-09-30T10:15:00",
+      "uid": "76572722-6ffd-4188-ba1a-d2aa7097ce7f",
+      "hoursMask": 3,
+      "description": "t/p",
+      "updatedAt": "2016-07-18T17:42:05.567"
+    },
+    {
+      "classes": [
+        "EI1A"
+      ],
+      "room": "R1_2.43",
+      "subject": "edb1/2",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-09-30T10:30:00",
+      "end": "2016-09-30T12:00:00",
+      "uid": "cad46a6e-2f6d-41ef-8c6b-737b2844ec44",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-04T18:32:05.667"
+    },
+    {
+      "classes": [
+        "EI4S2"
+      ],
+      "room": "R1_2.86",
+      "subject": "andr1",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-03T10:30:00",
+      "end": "2016-10-03T12:00:00",
+      "uid": "c61ed51d-4ede-425a-a0c2-7dc6e5a6a342",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI2B",
+        "EI2S1",
+        "EI2S2",
+        "EI2T"
+      ],
+      "room": "R1_2.40",
+      "subject": "proP",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-03T12:45:00",
+      "end": "2016-10-03T14:15:00",
+      "uid": "f572939e-301a-4b2d-8740-f799b43e4809",
+      "hoursMask": 96,
+      "description": "b/zw",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI2B",
+        "EI2S1",
+        "EI2S2",
+        "EI2T"
+      ],
+      "room": "R1_2.40",
+      "subject": "proP",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-03T14:30:00",
+      "end": "2016-10-03T16:00:00",
+      "uid": "75edf0eb-92dd-4ca1-a7aa-6d365a330ea2",
+      "hoursMask": 384,
+      "description": "b/zw",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI7"
+      ],
+      "room": "R1_2.72",
+      "subject": "dpr",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-04T10:30:00",
+      "end": "2016-10-04T12:00:00",
+      "uid": "aceb2776-93ce-49a5-9ac8-9492fb5555b0",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-21T18:12:05.5"
+    },
+    {
+      "classes": [
+        "SCHOLING"
+      ],
+      "room": "R1_?",
+      "subject": "didaktiek",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-05T08:45:00",
+      "end": "2016-10-05T10:15:00",
+      "uid": "8882f796-f247-4ab4-9960-c1c0eab50156",
+      "hoursMask": 3,
+      "description": "v16 wo1-4",
+      "updatedAt": "2016-07-08T17:02:04.457"
+    },
+    {
+      "classes": [
+        "EI7"
+      ],
+      "room": "R1_2.70",
+      "subject": "dpr",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-05T08:45:00",
+      "end": "2016-10-05T10:15:00",
+      "uid": "df53eeca-a44e-47a6-bec4-f5f10cd5ff1b",
+      "hoursMask": 3,
+      "description": "t/p",
+      "updatedAt": "2016-08-29T19:12:05.933"
+    },
+    {
+      "classes": [
+        "SCHOLING"
+      ],
+      "room": "R1_?",
+      "subject": "didaktiek",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-05T10:30:00",
+      "end": "2016-10-05T12:00:00",
+      "uid": "f45a07fa-7efb-4660-ab8d-5f7a6a912914",
+      "hoursMask": 12,
+      "description": "v16 wo1-4",
+      "updatedAt": "2016-07-08T17:02:04.457"
+    },
+    {
+      "classes": [
+        "EI3S3"
+      ],
+      "room": "R1_2.84",
+      "subject": "web3",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-05T12:45:00",
+      "end": "2016-10-05T14:15:00",
+      "uid": "5f2e0b6f-0293-41c3-9576-e8e49dcc0d57",
+      "hoursMask": 96,
+      "description": "t/p",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI1A"
+      ],
+      "room": "R1_2.43",
+      "subject": "edb1/2",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-05T14:30:00",
+      "end": "2016-10-05T16:00:00",
+      "uid": "8122bac7-1088-4b40-a140-353c8b5d0e1e",
+      "hoursMask": 384,
+      "description": "t/p",
+      "updatedAt": "2016-07-04T18:32:05.667"
+    },
+    {
+      "classes": [
+        "EI4S2"
+      ],
+      "room": "R1_2.84",
+      "subject": "andr1",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-06T10:30:00",
+      "end": "2016-10-06T12:00:00",
+      "uid": "2c385d68-c78d-40b9-8c78-9b391af535f0",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-21T18:12:05.5"
+    },
+    {
+      "classes": [
+        "EI1A"
+      ],
+      "room": "R1_2.43",
+      "subject": "edb1/2",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-06T14:30:00",
+      "end": "2016-10-06T16:00:00",
+      "uid": "75d8c4b9-d9ca-43b5-b691-0c875a907e05",
+      "hoursMask": 384,
+      "description": "t/p",
+      "updatedAt": "2016-07-04T18:32:05.667"
+    },
+    {
+      "classes": [
+        "EI3S3"
+      ],
+      "room": "R1_2.72",
+      "subject": "web3",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-07T08:45:00",
+      "end": "2016-10-07T10:15:00",
+      "uid": "1a929bb4-37a0-47b2-bc9f-c0e81faec4f2",
+      "hoursMask": 3,
+      "description": "t/p",
+      "updatedAt": "2016-07-18T17:42:05.567"
+    },
+    {
+      "classes": [
+        "EI1A"
+      ],
+      "room": "R1_2.43",
+      "subject": "edb1/2",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-07T10:30:00",
+      "end": "2016-10-07T12:00:00",
+      "uid": "8dc96f90-a6e3-42a3-90b2-d4e69c3f1a46",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-04T18:32:05.667"
+    },
+    {
+      "classes": [
+        "EI4S2"
+      ],
+      "room": "R1_2.86",
+      "subject": "andr1",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-10T10:30:00",
+      "end": "2016-10-10T12:00:00",
+      "uid": "441bbd56-2c19-485b-8db9-4417b39a8f5f",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI2B",
+        "EI2S1",
+        "EI2S2",
+        "EI2T"
+      ],
+      "room": "R1_2.40",
+      "subject": "proP",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-10T12:45:00",
+      "end": "2016-10-10T14:15:00",
+      "uid": "d76e0dee-b898-4244-876b-0ea09fe1b76b",
+      "hoursMask": 96,
+      "description": "b/zw",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI2B",
+        "EI2S1",
+        "EI2S2",
+        "EI2T"
+      ],
+      "room": "R1_2.40",
+      "subject": "proP",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-10T14:30:00",
+      "end": "2016-10-10T16:00:00",
+      "uid": "697902cd-49a4-469d-b65a-908dddea73bf",
+      "hoursMask": 384,
+      "description": "b/zw",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI7"
+      ],
+      "room": "R1_2.72",
+      "subject": "dpr",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-11T10:30:00",
+      "end": "2016-10-11T12:00:00",
+      "uid": "ab9f1f38-908e-416a-9006-891ad864beca",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-21T18:12:05.5"
+    },
+    {
+      "classes": [
+        "EI7"
+      ],
+      "room": "R1_2.70",
+      "subject": "dpr",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-12T08:45:00",
+      "end": "2016-10-12T10:15:00",
+      "uid": "63ab2225-68f7-4ca7-9dfd-48a511ac8664",
+      "hoursMask": 3,
+      "description": "t/p",
+      "updatedAt": "2016-08-29T19:12:05.933"
+    },
+    {
+      "classes": [
+        "EI3S3"
+      ],
+      "room": "R1_2.84",
+      "subject": "web3",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-12T12:45:00",
+      "end": "2016-10-12T14:15:00",
+      "uid": "c3fc83ba-d259-49f1-bab0-613b4187045b",
+      "hoursMask": 96,
+      "description": "t/p",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI1A"
+      ],
+      "room": "R1_2.43",
+      "subject": "edb1/2",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-12T14:30:00",
+      "end": "2016-10-12T16:00:00",
+      "uid": "cd81e905-2a7d-4d55-9098-a9cd68ac6c51",
+      "hoursMask": 384,
+      "description": "t/p",
+      "updatedAt": "2016-07-04T18:32:05.667"
+    },
+    {
+      "classes": [
+        "EI4S2"
+      ],
+      "room": "R1_2.84",
+      "subject": "andr1",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-13T10:30:00",
+      "end": "2016-10-13T12:00:00",
+      "uid": "5db02c80-be0b-44fa-801e-9454e7518264",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-21T18:12:05.5"
+    },
+    {
+      "classes": [
+        "EI1A"
+      ],
+      "room": "R1_2.43",
+      "subject": "edb1/2",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-13T14:30:00",
+      "end": "2016-10-13T16:00:00",
+      "uid": "bc2443aa-99dc-4dcb-9dbe-45760e3756e2",
+      "hoursMask": 384,
+      "description": "t/p",
+      "updatedAt": "2016-07-04T18:32:05.667"
+    },
+    {
+      "classes": [
+        "EI3S3"
+      ],
+      "room": "R1_2.72",
+      "subject": "web3",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-14T08:45:00",
+      "end": "2016-10-14T10:15:00",
+      "uid": "cfb7ca23-44f9-41a1-bcdb-f1f080ebb3ae",
+      "hoursMask": 3,
+      "description": "t/p",
+      "updatedAt": "2016-07-18T17:42:05.567"
+    },
+    {
+      "classes": [
+        "EI1A"
+      ],
+      "room": "R1_2.43",
+      "subject": "edb1/2",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-14T10:30:00",
+      "end": "2016-10-14T12:00:00",
+      "uid": "67db1126-38a9-4515-8f97-ae80f734af64",
+      "hoursMask": 12,
+      "description": "t/p",
+      "updatedAt": "2016-07-04T18:32:05.667"
+    },
+    {
+      "classes": [
+        "EI2B",
+        "EI2S1",
+        "EI2S2",
+        "EI2T"
+      ],
+      "room": "R1_2.40",
+      "subject": "proP",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-17T12:45:00",
+      "end": "2016-10-17T14:15:00",
+      "uid": "2b44c745-2b22-4466-8274-535933c37884",
+      "hoursMask": 96,
+      "description": "b/zw",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "EI2B",
+        "EI2S1",
+        "EI2S2",
+        "EI2T"
+      ],
+      "room": "R1_2.40",
+      "subject": "proP",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-17T14:30:00",
+      "end": "2016-10-17T16:00:00",
+      "uid": "bbda1c6a-fe4a-43da-a52d-8a26c3e3100c",
+      "hoursMask": 384,
+      "description": "b/zw",
+      "updatedAt": "2016-07-06T19:22:05.27"
+    },
+    {
+      "classes": [
+        "INCIDENTEEL"
+      ],
+      "room": "",
+      "subject": "meeting",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-21T08:45:00",
+      "end": "2016-10-21T10:15:00",
+      "uid": "30f2fca3-84c2-49d5-bb61-afdc4ad105e1",
+      "hoursMask": 3,
+      "description": "extern",
+      "updatedAt": "2016-09-23T17:22:08.417"
+    },
+    {
+      "classes": [
+        "INCIDENTEEL"
+      ],
+      "room": "",
+      "subject": "meeting",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-21T10:30:00",
+      "end": "2016-10-21T14:15:00",
+      "uid": "4e56b57f-3748-4335-b4b9-b0a51b9499e4",
+      "hoursMask": 124,
+      "description": "extern",
+      "updatedAt": "2016-09-23T17:22:08.417"
+    },
+    {
+      "classes": [
+        "INCIDENTEEL"
+      ],
+      "room": "",
+      "subject": "meeting",
+      "teacherAbbreviation": "teacher",
+      "start": "2016-10-21T14:30:00",
+      "end": "2016-10-21T16:00:00",
+      "uid": "425a5f3b-4068-4170-a41b-f87797f785e1",
+      "hoursMask": 384,
+      "description": "extern",
+      "updatedAt": "2016-09-23T17:22:08.417"
+    }
+  ],
+  "numberOfDays": 31,
+  "start": "2016-09-24T00:00:00+02:00",
+  "teachers": [
+    {
+      "id": "i874073",
+      "url": "https://api.fhict.nl/people/i874073",
+      "givenName": "Teacher",
+      "surName": "Teachers",
+      "initials": "T",
+      "displayName": "Teachers, Teacher T.",
+      "mail": "t.teachers@fontys.nl",
+      "office": "R1 2.00",
+      "telephoneNumber": "08850-12345",
+      "mobileNumber": "0612345678",
+      "photo": "https://picsum.photos/seed/picsum/200/200",
+      "department": "Engelstalige opleiding",
+      "title": "Medewerker FHICT",
+      "personalTitle": "teacher",
+      "affiliations": [
+        "user",
+        "staff",
+        "teacher"
+      ],
+      "updatedAt": "2016-09-21T20:25:02",
+      "uid": "123c45678f71de3887dedb5319b9b4a53888ab11",
+      "employeeId": "12345"
+    }
+  ],
+  "includeDeleted": false,
+  "latestUpdate": "2016-09-23T17:22:08.417"
+}
