@@ -1,6 +1,7 @@
 package tech.devscast.medifax.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,19 +12,37 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,117 +51,90 @@ import tech.devscast.medifax.ui.theme.MedifaxTheme
 import tech.devscast.medifax.ui.theme.poppinsFontFamily
 
 @Composable
-fun SignInScreen(){
-    val email = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("") }
-    Box(
+fun SignInScreen() {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var isPasswordVisible by remember { mutableStateOf(false) }
+
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.TopCenter
+            .padding(32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text(
+            text = "Connexion",
+            fontWeight = FontWeight.Black,
+            fontFamily = poppinsFontFamily,
+            fontSize = 40.sp,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .align(Alignment.Start)
+        )
+
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text(text = "Addresse Email") },
+            leadingIcon = { Icon(Icons.Default.Email, contentDescription = null) },
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            shape = MaterialTheme.shapes.medium,
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text(text = "Mot de passe") },
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
+            trailingIcon = {
+                IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
+                    Icon(
+                        if (isPasswordVisible) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                        contentDescription = null
+                    )
+                }
+            }
+        )
+        Spacer(modifier = Modifier.weight(1f))
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Bottom,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentSize(align = Alignment.BottomCenter)
         ) {
-            Text(
-                text = "SIGN IN",
-                fontWeight = FontWeight.Medium,
-                fontFamily = poppinsFontFamily,
-                fontSize = 30.sp,
-                color = Color(0xFF223A6A)
-            )
-            Spacer(modifier = Modifier.height(50.dp))
-            Surface{
-                Column (horizontalAlignment = Alignment.CenterHorizontally){
-                    TextField(
-                        value = email.value,
-                        onValueChange = { email.value = it },
-                        label = { Text("Enter your email") },
-                        modifier = Modifier.width(350.dp)
-
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    TextField(
-                        value = password.value,
-                        onValueChange = { password.value = it },
-                        label = {
-                            Row (verticalAlignment = Alignment.CenterVertically){
-                                Text("    Enter your password")
-                                Spacer(modifier = Modifier.weight(1f))
-                            }
-                        },
-                        modifier = Modifier.width(350.dp),
-
-                        )
-
-                }
-
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = "Forgot password?",
-                color = Color.Blue,
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .padding(bottom = 16.dp)
-            )
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Surface (modifier = Modifier.width(300.dp)) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Button(
-                        onClick = {},
-                        modifier = Modifier.fillMaxWidth()
-                    ){
-                        Text(
-                            text = "SIGN IN",
-                            fontSize = 17.sp,
-                            modifier = Modifier.padding(6.dp)
-                        )
-                    }
-
-                }
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            Row (verticalAlignment = Alignment.CenterVertically){
+            Button(
+                onClick = {},
+                modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.medium
+            ) {
                 Text(
-                    text = "Don't have an account ? "
+                    text = "Se connecter",
+                    fontSize = 17.sp,
+                    modifier = Modifier.padding(6.dp)
                 )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            FilledTonalButton(
+                onClick = {},
+                modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.medium
+            ) {
                 Text(
-                    text = " Sign Up",
-                    color = Color.Blue
-                    )
-
+                    text = "S'inscrire",
+                    fontSize = 17.sp,
+                    modifier = Modifier.padding(6.dp)
+                )
             }
-            Spacer(modifier = Modifier.height(55.dp))
-            Text(
-                text = "OR"
-            )
-            Spacer(modifier = Modifier.height(45.dp))
-
-            Surface (modifier = Modifier.width(300.dp)) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Button(
-                        onClick = {},
-                        modifier = Modifier.fillMaxWidth()
-                    ){
-                        Image(
-                            painter = painterResource(id = R.drawable.icons8_google),
-                            contentDescription = "Google sign in",
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Text(text = "    Sign in with Google")
-                    }
-
-                }
-            }
-
-
-
-
         }
     }
-
 }
 
 @Preview(showBackground = true, device = "id:pixel_8_pro", showSystemUi = true)

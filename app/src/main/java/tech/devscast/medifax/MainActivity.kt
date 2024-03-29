@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MedifaxTheme {
                 val isCompleted = preferences.getBoolean("completed", false)
-                val startDestination = if (isCompleted) Destination.Home.route else Destination.OnBoarding.route
+                val startDestination = if (isCompleted) Destination.GetStarted.route else Destination.OnBoarding.route
                 val navController = rememberNavController()
                 SetupNavGraph(
                     navController = navController,

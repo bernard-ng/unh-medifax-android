@@ -131,7 +131,7 @@ fun SignUpScreen() {
             ) {
                 Text(
                     text = "S'inscrire",
-                    fontSize = 17.sp,
+                    fontSize = 16.sp,
                     modifier = Modifier.padding(6.dp)
                 )
             }
@@ -143,7 +143,7 @@ fun SignUpScreen() {
             ) {
                 Text(
                     text = "Se connecter",
-                    fontSize = 17.sp,
+                    fontSize = 16.sp,
                     modifier = Modifier.padding(6.dp)
                 )
             }

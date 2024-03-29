@@ -7,13 +7,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
@@ -35,11 +40,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import tech.devscast.medifax.R
+import tech.devscast.medifax.model.Appointment
+import tech.devscast.medifax.model.Doctor
+import tech.devscast.medifax.model.Specialization
+import tech.devscast.medifax.ui.components.DoctorListItem
 import tech.devscast.medifax.ui.theme.MedifaxTheme
+import tech.devscast.medifax.ui.theme.poppinsFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,107 +60,63 @@ fun AppointmentScreen(
     onBackClicked: () -> Unit  = {},
     onBookAppointment: () -> Unit = {}
 ) {
-    var email by remember { mutableStateOf("") }
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Doctor Detail") },
-                navigationIcon = {
-                    IconButton(onClick = onBackClicked) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
-                    }
-                }
-            )
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = onBookAppointment) {
-                Text("Book Appointment")
-            }
-        },
-        floatingActionButtonPosition = FabPosition.Center,
-        content = { padding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.doctor_svgrepo_com),
-                        contentDescription = "Doctor Image",
-                        modifier = Modifier
-                            .size(100.dp)
-                            .clip(CircleShape)
-                            .border(2.dp, Color.Gray, CircleShape)
-                    )
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Column {
-                        Text(
-                            text = "Dr. Amaury",
-                            style = MaterialTheme.typography.displayMedium,
-                            color = Color.Black
-                        )
-                        Text(
-                            text = "doctorSpecialty",
-                            style = MaterialTheme.typography.headlineLarge,
-                            color = Color.Gray
-                        )
-                        Row {
-                            Icon(
-                                imageVector = Icons.Default.Star,
-                                contentDescription = "Rating",
-                                tint = Color.Yellow
-                            )
-                            Text(
-                                text = "doctorRating".toString(),
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = Color.Black
-                            )
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(
-                                text = "${"octorDistance"}m away",
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = Color.Black
-                            )
-                        }
-                    }
-                }
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                ) {
-                    Text(
-                        text = "About",
-                        style = MaterialTheme.typography.headlineLarge,
-                        color = Color.Black
-                    )
-                    Text(
-                        text = "No text", // Remplacez cela par une description réelle du médecin
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = Color.Gray
-                    )
-                    TextButton(onClick = { }) {
-                        Text("Read more", textAlign = TextAlign.End)
-                    }
-                }
-                OutlinedTextField(
-                    value = email,
-                    onValueChange = { newEmail -> email = newEmail },
-                    label = { Text("Enter your email") },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                )
-            }
-        }
+    var message by remember { mutableStateOf("") }
+    val doctor = Doctor(
+        12,
+        "hello@gmail.com",
+        listOf("a", "b"),
+        "aaaa",
+        "Dr. Vaamana",
+        "+23333",
+        "",
+        "",
+        false,
+        true,
+        emptyList<Appointment>(),
+        Specialization(12, "Dentists", "", emptyList())
     )
+
+    Column (
+        modifier = Modifier.padding(24.dp)
+    ) {
+        DoctorListItem(doctor = doctor)
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(
+            text = "A propos",
+            fontFamily = poppinsFontFamily,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = "Lorem ipsum dolor sit amet, consectetur adipi elit, sed do eiusmod tempor incididunt ut laore et dolore magna aliqua. Ut enim ad minim veniam... Read more",
+            color = Color(0x66221F1F),
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = message,
+            onValueChange = { message = it },
+            label = { Text(text = "Description") },
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
+            maxLines = 10
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
+        Button(
+            onClick = {},
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium
+        ) {
+            Text(
+                text = "Réservez un rendez-vous",
+                fontSize = 16.sp,
+                modifier = Modifier.padding(6.dp)
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true, device = "id:pixel_8_pro", showSystemUi = true)

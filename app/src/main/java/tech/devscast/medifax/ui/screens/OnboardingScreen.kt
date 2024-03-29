@@ -34,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 import tech.devscast.medifax.data.OnBoardingPage
@@ -97,7 +98,11 @@ fun OnBoardingScreen(
                 },
                 shape = MaterialTheme.shapes.medium,
             ) {
-                Text(text = "Commencer", modifier = Modifier.padding(6.dp))
+                Text(
+                    text = "Commencer",
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(6.dp)
+                )
             }
         }
     }
