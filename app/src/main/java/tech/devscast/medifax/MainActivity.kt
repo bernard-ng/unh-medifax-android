@@ -4,12 +4,17 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import tech.devscast.medifax.navigation.Destination
 import tech.devscast.medifax.navigation.SetupNavGraph
+import tech.devscast.medifax.ui.components.BottomNavigationBar
 import tech.devscast.medifax.ui.theme.MedifaxTheme
 import javax.inject.Inject
 
