@@ -1,4 +1,4 @@
-package tech.devscast.medifax.data
+package tech.devscast.medifax.ui.screens.onboarding
 
 import androidx.annotation.DrawableRes
 import tech.devscast.medifax.R

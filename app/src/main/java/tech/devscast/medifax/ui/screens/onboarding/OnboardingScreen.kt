@@ -1,4 +1,4 @@
-package tech.devscast.medifax.ui.screens
+package tech.devscast.medifax.ui.screens.onboarding
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -35,9 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
-import tech.devscast.medifax.data.OnBoardingPage
 import tech.devscast.medifax.ui.theme.MedifaxTheme
 import tech.devscast.medifax.viewmodel.OnboardingViewModel
 

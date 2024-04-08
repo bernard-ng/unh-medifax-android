@@ -41,7 +41,7 @@ import tech.devscast.medifax.ui.theme.poppinsFontFamily
 fun DoctorListItem(doctor: Doctor) {
     OutlinedCard(
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFFFFFFF),
+            containerColor = MaterialTheme.colorScheme.surface,
         ),
         border = BorderStroke(2.dp, Color(0x1A221F1F)),
         shape = MaterialTheme.shapes.small,
@@ -75,7 +75,7 @@ fun DoctorListItem(doctor: Doctor) {
                 )
                 Text(
                     text = doctor.specialization.name,
-                    color = Color(0x66221F1F),
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Medium,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -101,10 +101,36 @@ fun DoctorListItem(doctor: Doctor) {
     }
 }
 
-@Preview(showBackground = true, device = "id:pixel_8_pro", showSystemUi = true)
+@Preview()
 @Composable
 fun PreviewDoctorListItem() {
     MedifaxTheme {
+        val doctor = Doctor(
+            12,
+            "hello@gmail.com",
+            listOf("a", "b"),
+            "aaaa",
+            "Dr. Vaamana",
+            "+23333",
+            "",
+            "",
+            false,
+            true,
+            emptyList<Appointment>(),
+            Specialization(12, "Dentists", "", emptyList())
+        )
+        Column (
+            modifier = Modifier.padding(24.dp)
+        ) {
+            DoctorListItem(doctor = doctor)
+        }
+    }
+}
+
+@Preview()
+@Composable
+fun PreviewDoctorListItemDark() {
+    MedifaxTheme (darkTheme = true) {
         val doctor = Doctor(
             12,
             "hello@gmail.com",

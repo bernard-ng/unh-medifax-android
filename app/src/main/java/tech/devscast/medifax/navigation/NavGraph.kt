@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import tech.devscast.medifax.ui.screens.AppointmentScreen
 import tech.devscast.medifax.ui.screens.GetStartedScreen
 import tech.devscast.medifax.ui.screens.HomeScreen
-import tech.devscast.medifax.ui.screens.OnBoardingScreen
+import tech.devscast.medifax.ui.screens.onboarding.OnBoardingScreen
 import tech.devscast.medifax.ui.screens.SignInScreen
 import tech.devscast.medifax.ui.screens.SignUpScreen
 import tech.devscast.medifax.viewmodel.OnboardingViewModel

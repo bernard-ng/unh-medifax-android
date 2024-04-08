@@ -24,3 +24,13 @@ fun PreviewHomeScreen() {
         HomeScreen()
     }
 }
+
+@Preview(showSystemUi = true, showBackground = true, device = "id:pixel_8_pro")
+@Composable
+fun PreviewHomeScreenDark() {
+    MedifaxTheme (darkTheme = true) {
+        Surface {
+            HomeScreen()
+        }
+    }
+}

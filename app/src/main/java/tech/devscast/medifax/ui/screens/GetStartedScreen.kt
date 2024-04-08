@@ -12,6 +12,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -132,7 +133,17 @@ fun GetStartedScreen(
 @Preview(showBackground = true, device = "id:pixel_8_pro", showSystemUi = true)
 @Composable
 fun PreviewGetStartedScreen() {
-    MedifaxTheme {
+    MedifaxTheme (darkTheme = false) {
         GetStartedScreen({}, {})
+    }
+}
+
+@Preview(showBackground = true, device = "id:pixel_8_pro", showSystemUi = true)
+@Composable
+fun PreviewGetStartedScreenDark() {
+    MedifaxTheme (darkTheme = true) {
+        Surface {
+            GetStartedScreen({}, {})
+        }
     }
 }

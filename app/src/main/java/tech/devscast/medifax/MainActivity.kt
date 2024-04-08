@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material3.Surface
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,14 +24,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MedifaxTheme {
+            MedifaxTheme (darkTheme = false) {
                 val isCompleted = preferences.getBoolean("completed", false)
                 val startDestination = if (isCompleted) Destination.GetStarted.route else Destination.OnBoarding.route
                 val navController = rememberNavController()
-                SetupNavGraph(
-                    navController = navController,
-                    startDestination = startDestination,
-                )
+
+                Surface {
+                    SetupNavGraph(
+                        navController = navController,
+                        startDestination = startDestination,
+                    )
+                }
             }
         }
     }

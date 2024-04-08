@@ -144,3 +144,13 @@ fun PreviewSignIn() {
         SignInScreen()
     }
 }
+
+@Preview(showBackground = true, device = "id:pixel_8_pro", showSystemUi = true)
+@Composable
+fun PreviewSignInDark() {
+    MedifaxTheme (darkTheme = true) {
+        Surface {
+            SignInScreen()
+        }
+    }
+}
