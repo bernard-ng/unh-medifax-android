@@ -52,7 +52,7 @@ fun DoctorListScreen(navController: NavController = rememberNavController()) {
            TopAppBar(
                title = { Text("Nos Docteurs") },
                navigationIcon = {
-                   IconButton(onClick = { /* do something */ }) {
+                   IconButton(onClick = { navController.navigateUp() }) {
                        Icon(
                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                            contentDescription = "Localized description"
@@ -72,9 +72,7 @@ fun DoctorListScreen(navController: NavController = rememberNavController()) {
                item {
                    DoctorListItem(
                        doctor = doctor,
-                       onClick = {
-                           navController.navigate(Destination.DoctorDetail.withArgument(doctor.id.toString()))
-                       }
+                       onClick = { navController.navigate(Destination.DoctorDetail.route) }
                    )
                    Spacer(modifier = Modifier.height(16.dp))
                }

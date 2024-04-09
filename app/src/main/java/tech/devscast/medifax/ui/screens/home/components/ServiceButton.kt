@@ -13,10 +13,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ServiceButton(text: String, icon: ImageVector) {
+fun ServiceButton(text: String, icon: ImageVector, onClick: () -> Unit ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         FilledIconButton(
-            onClick = { /* TODO */ },
+            onClick = { onClick() },
             modifier = Modifier
                 .size(80.dp)
                 .padding(12.dp)

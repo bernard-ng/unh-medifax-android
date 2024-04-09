@@ -134,7 +134,7 @@ fun ProfileScreen(navController: NavController = rememberNavController()) {
                 ListItem(
                     text = "Appointment",
                     icon = Icons.Default.CalendarMonth,
-                    onClick = {}
+                    onClick = { navController.navigate(Destination.Appointment.route) }
                 )
                 ListItem(
                     text = "Payment Method",

@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
@@ -22,12 +23,6 @@ class MainActivity : ComponentActivity() {
     lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.light(
-                android.graphics.Color.TRANSPARENT,
-                android.graphics.Color.TRANSPARENT
-            )
-        )
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
@@ -37,7 +32,7 @@ class MainActivity : ComponentActivity() {
                 val startDestination = if (isCompleted) Destination.GetStarted.route else Destination.OnBoarding.route
                 val navController = rememberNavController()
 
-                Surface {
+                Surface (color = MaterialTheme.colorScheme.background) {
                     DefaultNavGraph(
                         navController = navController,
                         startDestination = startDestination,

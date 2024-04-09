@@ -7,8 +7,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import tech.devscast.medifax.ui.screens.GetStartedScreen
 import tech.devscast.medifax.ui.screens.doctor.DoctorDetailScreen
+import tech.devscast.medifax.ui.screens.doctor.DoctorListScreen
+import tech.devscast.medifax.ui.screens.home.HomeScreen
 import tech.devscast.medifax.ui.screens.onboarding.OnBoardingScreen
 import tech.devscast.medifax.ui.screens.onboarding.OnboardingViewModel
+import tech.devscast.medifax.ui.screens.profile.AppointmentScreen
+import tech.devscast.medifax.ui.screens.profile.ProfileScreen
 
 @Composable
 fun AuthenticatedNavGraph() {
@@ -18,29 +22,25 @@ fun AuthenticatedNavGraph() {
         navController = navController,
         startDestination = Destination.Home.route
     ) {
-        composable(route = Destination.OnBoarding.route) {
-            val viewModel: OnboardingViewModel = hiltViewModel()
-            OnBoardingScreen(
-                viewModel = viewModel,
-                onBoardingCompleted = {
-                    navController.popBackStack()
-                    navController.navigate(Destination.GetStarted.route)
-                }
-            )
+
+        composable(route = Destination.Home.route) {
+            HomeScreen(navController)
         }
 
-        composable(route = Destination.GetStarted.route) {
-            GetStartedScreen(
-                onSignInClick = { navController.navigate(Destination.SignIn.route) },
-                onSignUpClick = { navController.navigate(Destination.SignUp.route) }
-            )
+        composable(route = Destination.Profile.route) {
+            ProfileScreen(navController)
         }
 
         composable(route = Destination.Appointment.route) {
-            DoctorDetailScreen(
-                onBackClicked = { navController.navigate(Destination.DoctorList.route) },
-                {}
-            )
+            AppointmentScreen(navController)
+        }
+
+        composable(route = Destination.DoctorList.route) {
+            DoctorListScreen(navController)
+        }
+
+        composable(route = Destination.DoctorDetail.route) {
+            DoctorDetailScreen(navController)
         }
     }
 }
