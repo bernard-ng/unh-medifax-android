@@ -1,4 +1,4 @@
-package tech.devscast.medifax.viewmodel
+package tech.devscast.medifax.ui.screens.onboarding
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import tech.devscast.medifax.data.DataStoreRepository
 import javax.inject.Inject
 
 @HiltViewModel

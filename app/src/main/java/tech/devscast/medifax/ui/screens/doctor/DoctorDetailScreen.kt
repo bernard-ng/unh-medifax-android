@@ -1,5 +1,6 @@
-package tech.devscast.medifax.ui.screens
+package tech.devscast.medifax.ui.screens.doctor
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,13 +26,13 @@ import androidx.compose.ui.unit.sp
 import tech.devscast.medifax.model.Appointment
 import tech.devscast.medifax.model.Doctor
 import tech.devscast.medifax.model.Specialization
-import tech.devscast.medifax.ui.components.DoctorListItem
+import tech.devscast.medifax.ui.screens.doctor.components.DoctorListItem
 import tech.devscast.medifax.ui.theme.MedifaxTheme
 import tech.devscast.medifax.ui.theme.poppinsFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppointmentScreen(
+fun DoctorDetailScreen(
     onBackClicked: () -> Unit = {},
     onBookAppointment: () -> Unit = {}
 ) {
@@ -54,7 +55,7 @@ fun AppointmentScreen(
     Column(
         modifier = Modifier.padding(24.dp)
     ) {
-        DoctorListItem(doctor = doctor)
+        DoctorListItem(doctor = doctor, {})
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = "A propos",
@@ -72,27 +73,30 @@ fun AppointmentScreen(
         )
 
         Spacer(modifier = Modifier.weight(1f))
-        OutlinedTextField(
-            value = message,
-            onValueChange = { if (it.length <= 255) message = it },
-            label = { Text(text = "Description") },
-            modifier = Modifier
-                .height(150.dp)
-                .fillMaxWidth(),
-            supportingText = {
-                Text(
-                    text = "${message.length} / 255",
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.End
-                )
-            },
-            shape = MaterialTheme.shapes.medium,
-        )
+        AnimatedVisibility(visible = doctor.isAvailable) {
+            OutlinedTextField(
+                value = message,
+                onValueChange = { if (it.length <= 255) message = it },
+                label = { Text(text = "Description") },
+                modifier = Modifier
+                    .height(150.dp)
+                    .fillMaxWidth(),
+                supportingText = {
+                    Text(
+                        text = "${message.length} / 255",
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.End
+                    )
+                },
+                shape = MaterialTheme.shapes.medium,
+            )
+        }
         Spacer(modifier = Modifier.height(24.dp))
         Button(
             onClick = {},
             modifier = Modifier.fillMaxWidth(),
-            shape = MaterialTheme.shapes.medium
+            shape = MaterialTheme.shapes.medium,
+            enabled = doctor.isAvailable
         ) {
             Text(
                 text = "Réservez un rendez-vous",
@@ -107,7 +111,7 @@ fun AppointmentScreen(
 @Composable
 fun PreviewAppointmentScreen() {
     MedifaxTheme {
-        AppointmentScreen(
+        DoctorDetailScreen(
             onBackClicked = {},
             onBookAppointment = {}
         )
