@@ -29,19 +29,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import tech.devscast.medifax.R
-import tech.devscast.medifax.model.Appointment
-import tech.devscast.medifax.model.Doctor
-import tech.devscast.medifax.model.Specialization
+import tech.devscast.medifax.data.entity.Doctor
+import tech.devscast.medifax.data.entity.Specialization
 import tech.devscast.medifax.ui.theme.MedifaxTheme
 import tech.devscast.medifax.ui.theme.poppinsFontFamily
 
 @Composable
-fun DoctorListItem(doctor: Doctor, onClick: () -> Unit  ) {
+fun DoctorListItem(doctor: Doctor, onClick: () -> Unit) {
     Card(
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = {  onClick() })
+            .clickable(onClick = { onClick() })
     ) {
         Row(
             modifier = Modifier.padding(10.dp)
@@ -104,16 +103,11 @@ fun PreviewDoctorListItem() {
         val doctor = Doctor(
             12,
             "hello@gmail.com",
-            listOf("a", "b"),
-            "aaaa",
             "Dr. Vaamana",
             "+23333",
-            "",
-            "",
-            false,
             true,
-            emptyList<Appointment>(),
-            Specialization(12, "Dentists", "", emptyList())
+            Specialization(12, "Dentists", ""),
+            "",
         )
         Column(
             modifier = Modifier.padding(24.dp)
@@ -130,16 +124,11 @@ fun PreviewDoctorListItemDark() {
         val doctor = Doctor(
             12,
             "hello@gmail.com",
-            listOf("a", "b"),
-            "aaaa",
             "Dr. Vaamana",
             "+23333",
-            "",
-            "",
-            false,
             true,
-            emptyList<Appointment>(),
-            Specialization(12, "Dentists", "", emptyList())
+            Specialization(12, "Dentists", ""),
+            "",
         )
         Column(
             modifier = Modifier.padding(24.dp)

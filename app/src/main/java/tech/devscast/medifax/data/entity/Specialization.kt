@@ -1,4 +1,4 @@
-package tech.devscast.medifax.model
+package tech.devscast.medifax.data.entity
 
 import kotlinx.serialization.Serializable
 
@@ -7,5 +7,4 @@ data class Specialization(
     val id: Int,
     val name: String,
     val description: String,
-    val doctors: List<Doctor>
 )

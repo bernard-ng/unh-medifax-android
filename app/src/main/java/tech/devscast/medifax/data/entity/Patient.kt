@@ -1,4 +1,4 @@
-package tech.devscast.medifax.model
+package tech.devscast.medifax.data.entity
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,14 +7,10 @@ import kotlinx.serialization.Serializable
 data class Patient(
     val id: Int,
     val email: String,
-    val roles: List<String>,
-    val password: String,
+    val fullName: String,
     val phoneNumber: String,
-    val createdAt: String,
-    val updatedAt: String,
-    val isVerified: Boolean,
     val subscription: Subscription,
-    val appointments: List<Appointment>
+    val profileImage: String? = null
 )
 
 @Serializable

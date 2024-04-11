@@ -1,4 +1,4 @@
-package tech.devscast.medifax.model
+package tech.devscast.medifax.data.entity
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -8,8 +8,6 @@ data class Appointment(
     val id: Int,
     val patient: Patient,
     val doctor: Doctor,
-    val createdAt: String,
-    val updatedAt: String,
     val status: String,
     val description: String,
     val date: String
