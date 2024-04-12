@@ -5,8 +5,4 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class MedifaxApplication: Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-    }
 }

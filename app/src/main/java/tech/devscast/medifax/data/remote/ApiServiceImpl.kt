@@ -13,10 +13,11 @@ import io.ktor.http.contentType
 import tech.devscast.medifax.data.entity.Appointment
 import tech.devscast.medifax.data.entity.Doctor
 import tech.devscast.medifax.data.entity.Patient
-import tech.devscast.medifax.data.remote.dto.CreateAppointmentRequest
-import tech.devscast.medifax.data.remote.dto.LoginCheckRequest
-import tech.devscast.medifax.data.remote.dto.LoginCheckResponse
-import tech.devscast.medifax.data.remote.dto.Response
+import tech.devscast.medifax.domain.ApiService
+import tech.devscast.medifax.domain.dto.CreateAppointmentRequest
+import tech.devscast.medifax.domain.dto.LoginCheckRequest
+import tech.devscast.medifax.domain.dto.LoginCheckResponse
+import tech.devscast.medifax.domain.dto.Response
 
 class ApiServiceImpl(
     private val client: HttpClient
@@ -37,11 +38,11 @@ class ApiServiceImpl(
     }
 
     override suspend fun getPatient(id: String): Response<Patient?> {
-       return tryRequest {
-           val url = Endpoints.PATIENT.replace("{id}", id)
-           val patient: Patient = client.get(url).body()
-           Response(patient, success = true)
-       }
+        return tryRequest {
+            val url = Endpoints.PATIENT.replace("{id}", id)
+            val patient: Patient = client.get(url).body()
+            Response(patient, success = true)
+        }
     }
 
     override suspend fun getPatientAppointments(id: String): Response<List<Appointment>?> {
