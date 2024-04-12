@@ -32,34 +32,12 @@ cabinet médical.
 
 ## Screenshots
 
-<img src=".github/screenshots/splash_screen.png" width="200">&nbsp;
-<img src=".github/screenshots/onboarding_screen_1.png" width="200">&nbsp;
-<img src=".github/screenshots/onboarding_screen_2.png" width="200">&nbsp;
-<img src=".github/screenshots/signup_screen.png" width="200">&nbsp;
-
-## assignment 2
-
-code source :
-- [EventHandlingScreen.kt](app/src/main/java/tech/devscast/medifax/ui/screens/EventHandlingScreen.kt)
-- [TouchDrawingScreen.kt](app/src/main/java/tech/devscast/medifax/ui/screens/TouchDrawingScreen.kt)
-
-<img src=".github/screenshots/event_handling.gif" width="200">&nbsp;
-<img src=".github/screenshots/touch_drawing.gif" width="200">&nbsp;
-
-## assignment 3
-
-## camera
-
-code source : 
-- [AndroidManifest.xml](app/src/main/AndroidManifest.xml)
-- [CameraActivity.kt](app/src/main/java/tech/devscast/medifax/CameraActivity.kt)
-- [CameraScreen.kt](app/src/main/java/tech/devscast/medifax/ui/screens/assignment/CameraScreen.kt)
-
-<img src=".github/screenshots/camera_1.png" width="200">&nbsp;
-<img src=".github/screenshots/camera_2.png" width="200">&nbsp;
-<img src=".github/screenshots/camera_3.png" width="200">&nbsp;
-
-## assignment 4
-
-<img src=".github/screenshots/navigation.gif" width="200">&nbsp;
-<img src=".github/screenshots/navigation_drawer.gif" width="200">&nbsp;
+<img src=".github/screenshots/screenshot1.png" width="200">&nbsp;
+<img src=".github/screenshots/screenshot2.png" width="200">&nbsp;
+<img src=".github/screenshots/screenshot3.png" width="200">&nbsp;
+<img src=".github/screenshots/screenshot4.png" width="200">&nbsp;
+<img src=".github/screenshots/screenshot5.png" width="200">&nbsp;
+<img src=".github/screenshots/screenshot6.png" width="200">&nbsp;
+<img src=".github/screenshots/screenshot7.png" width="200">&nbsp;
+<img src=".github/screenshots/screenshot8.png" width="200">&nbsp;
+<img src=".github/screenshots/screenshot9.png" width="200">&nbsp;
