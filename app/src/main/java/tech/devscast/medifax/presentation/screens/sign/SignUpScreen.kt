@@ -97,7 +97,10 @@ fun SignUpScreen(
                     .wrapContentSize(align = Alignment.BottomCenter)
             ) {
                 Button(
-                    onClick = { onSignUpCompleted() },
+                    onClick = {
+                        viewModel.register(email, password, name)
+                        onSignUpCompleted()
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     shape = MaterialTheme.shapes.medium
                 ) {

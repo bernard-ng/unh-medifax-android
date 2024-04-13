@@ -17,6 +17,7 @@ import tech.devscast.medifax.data.remote.ApiServiceImpl
 import tech.devscast.medifax.domain.dto.CreateAppointmentRequest
 import tech.devscast.medifax.domain.dto.LoginCheckRequest
 import tech.devscast.medifax.domain.dto.LoginCheckResponse
+import tech.devscast.medifax.domain.dto.RegisterRequest
 import tech.devscast.medifax.domain.dto.Response
 
 interface ApiService {
@@ -27,6 +28,7 @@ interface ApiService {
     suspend fun getPatientAppointments(id: String): Response<List<Appointment>?>
     suspend fun createAppointment(data: CreateAppointmentRequest): Response<Appointment?>
     suspend fun login(data: LoginCheckRequest): Response<LoginCheckResponse?>
+    suspend fun register(data: RegisterRequest): Response<Patient?>
 
     companion object {
         fun create(): ApiService {

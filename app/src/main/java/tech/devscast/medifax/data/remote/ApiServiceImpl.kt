@@ -17,6 +17,7 @@ import tech.devscast.medifax.domain.ApiService
 import tech.devscast.medifax.domain.dto.CreateAppointmentRequest
 import tech.devscast.medifax.domain.dto.LoginCheckRequest
 import tech.devscast.medifax.domain.dto.LoginCheckResponse
+import tech.devscast.medifax.domain.dto.RegisterRequest
 import tech.devscast.medifax.domain.dto.Response
 
 class ApiServiceImpl(
@@ -73,6 +74,16 @@ class ApiServiceImpl(
         }
     }
 
+    override suspend fun register(data: RegisterRequest): Response<Patient?> {
+        return tryRequest {
+            val response: Patient = client.post(Endpoints.REGISTER) {
+                contentType(ContentType.Application.Json)
+                setBody(data)
+            }.body()
+            Response(response, success = true)
+        }
+    }
+
     private suspend fun <T> tryRequest(request: suspend () -> Response<T?>): Response<T?> {
         return try {
             request()
@@ -87,7 +98,7 @@ class ApiServiceImpl(
 
     private fun <T> handleHttpException(response: HttpResponse): Response<T?> {
         return Response(
-            null,
+            data = null,
             code = response.status.value,
             description = response.status.description,
             success = false

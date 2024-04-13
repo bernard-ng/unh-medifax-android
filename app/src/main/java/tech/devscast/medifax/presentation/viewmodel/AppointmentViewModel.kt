@@ -9,4 +9,6 @@ import javax.inject.Inject
 class AppointmentViewModel @Inject constructor(
     private val repository: AppointmentRepository
 ): ViewModel() {
+
+
 }
