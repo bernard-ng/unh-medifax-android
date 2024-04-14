@@ -26,14 +26,18 @@ class ApiServiceImpl(
     override suspend fun getDoctor(id: String): Response<Doctor?> {
         return tryRequest {
             val url = Endpoints.DOCTOR.replace("{id}", id)
-            val doctor: Doctor = client.get(url).body()
+            val doctor: Doctor = client.get(url) {
+                contentType(ContentType.Application.Json)
+            }.body()
             Response(doctor, success = true)
         }
     }
 
     override suspend fun getDoctors(): Response<List<Doctor>?> {
         return tryRequest {
-            val doctors: List<Doctor> = client.get(Endpoints.DOCTORS).body()
+            val doctors: List<Doctor> = client.get(Endpoints.DOCTORS) {
+                contentType(ContentType.Application.Json)
+            }.body()
             Response(doctors, success = true)
         }
     }
@@ -41,7 +45,9 @@ class ApiServiceImpl(
     override suspend fun getPatient(id: String): Response<Patient?> {
         return tryRequest {
             val url = Endpoints.PATIENT.replace("{id}", id)
-            val patient: Patient = client.get(url).body()
+            val patient: Patient = client.get(url) {
+                contentType(ContentType.Application.Json)
+            }.body()
             Response(patient, success = true)
         }
     }
@@ -49,7 +55,9 @@ class ApiServiceImpl(
     override suspend fun getPatientAppointments(id: String): Response<List<Appointment>?> {
         return tryRequest {
             val url = Endpoints.PATIENT_APPOINTMENTS.replace("{id}", id)
-            val appointment: List<Appointment> = client.get(url).body()
+            val appointment: List<Appointment> = client.get(url) {
+                contentType(ContentType.Application.Json)
+            }.body()
             Response(appointment, success = true)
         }
     }

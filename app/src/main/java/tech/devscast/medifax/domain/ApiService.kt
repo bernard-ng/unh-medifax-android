@@ -1,5 +1,6 @@
 package tech.devscast.medifax.domain
 
+import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -40,8 +41,12 @@ interface ApiService {
                         })
                     }
                     install(Logging) {
-                        logger = Logger.DEFAULT
-                        level = LogLevel.HEADERS
+                        logger = object: Logger {
+                            override fun log(message: String) {
+                                Log.i("KTOR", message)
+                            }
+                        }
+                        level = LogLevel.ALL
                         filter { request ->
                             request.url.host.contains("medifax.devscast.tech")
                         }

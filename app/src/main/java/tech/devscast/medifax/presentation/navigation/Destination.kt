@@ -25,7 +25,7 @@ sealed class Destination(val route: String, val label: String = "", val icon: Im
     data object Profile : Destination(route = "profile", label = "Profil", icon = Icons.Rounded.Person)
 
     data object DoctorList : Destination(route = "doctors")
-    data object DoctorDetail : Destination(route = "doctorss")
+    data object DoctorDetail : Destination(route = "doctor_details")
 }
 
 fun Destination.withArgument(arg: String): String {

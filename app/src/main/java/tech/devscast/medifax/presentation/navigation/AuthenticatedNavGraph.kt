@@ -35,8 +35,11 @@ fun AuthenticatedNavGraph() {
             DoctorListScreen(navController)
         }
 
-        composable(route = Destination.DoctorDetail.route) {
-            DoctorDetailScreen(navController)
+        composable(route = "${Destination.DoctorDetail.route}/{id}") {
+            DoctorDetailScreen(
+                doctorId = it.arguments?.getString("id").toString(),
+                navController = navController
+            )
         }
     }
 }

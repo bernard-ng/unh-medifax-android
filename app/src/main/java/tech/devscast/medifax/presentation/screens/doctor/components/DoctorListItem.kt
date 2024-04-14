@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -23,11 +24,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import tech.devscast.medifax.R
 import tech.devscast.medifax.data.entity.Doctor
 import tech.devscast.medifax.data.entity.Specialization
@@ -50,11 +55,16 @@ fun DoctorListItem(doctor: Doctor, onClick: () -> Unit) {
                     .clip(MaterialTheme.shapes.medium)
                     .shadow(4.dp)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.profil),
-                    contentDescription = "Photo du Médecin",
-                    modifier = Modifier
-                        .size(100.dp)
+                AsyncImage(
+                    model = ImageRequest.Builder(context = LocalContext.current)
+                        .data("https://medifax.devscast.tech/uploads/${doctor.profileImage}")
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = doctor.fullName,
+                    placeholder = painterResource(id = R.drawable.doctor_svgrepo_com),
+                    error = painterResource(id = R.drawable.doctor_svgrepo_com),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.size(100.dp)
                 )
             }
             Spacer(modifier = Modifier.width(14.dp))
@@ -77,7 +87,7 @@ fun DoctorListItem(doctor: Doctor, onClick: () -> Unit) {
                 FilterChip(
                     selected = doctor.isAvailable,
                     onClick = { Log.d("Assist chip", "hello world") },
-                    label = { Text("Disponible") },
+                    label = { if (doctor.isAvailable) Text("Disponible") else Text("Indisponible") },
                     leadingIcon = if (doctor.isAvailable) {
                         {
                             Icon(
@@ -94,6 +104,7 @@ fun DoctorListItem(doctor: Doctor, onClick: () -> Unit) {
             }
         }
     }
+    Spacer(modifier = Modifier.height(16.dp))
 }
 
 @Preview()

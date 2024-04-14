@@ -8,7 +8,7 @@ data class Patient(
     val id: Int,
     val email: String,
     val fullName: String,
-    val phoneNumber: String,
+    val phoneNumber: String = "",
     val subscription: Subscription,
     val profileImage: String? = null
 )

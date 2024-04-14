@@ -7,13 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import tech.devscast.medifax.data.entity.Appointment
 import tech.devscast.medifax.domain.repository.AppointmentRepository
 import javax.inject.Inject
-
 
 data class AppointmentViewState(
     val appointments: List<Appointment> = emptyList(),
@@ -22,26 +20,11 @@ data class AppointmentViewState(
     val errorMessage: String? = null
 )
 
-interface Mapper<I, O> {
-    fun map(input: I): O
-}
-
-class ErrorMessageMapper : Mapper<Int?, String?> {
-    override fun map(input: Int?): String? {
-        return when (input) {
-            in 400..499 -> "Not found"
-            in 500..599 -> "Server error"
-            else -> null
-        }
-    }
-}
-
 @HiltViewModel
 class AppointmentViewModel @Inject constructor(
     private val repository: AppointmentRepository
 ) : ViewModel() {
 
-    private val errorMessageMapper = ErrorMessageMapper()
     var uiState by mutableStateOf(AppointmentViewState())
         private set
 
@@ -57,7 +40,7 @@ class AppointmentViewModel @Inject constructor(
             uiState = uiState.copy(
                 isLoading = false,
                 createdAppointment = response.data,
-                errorMessage = errorMessageMapper.map(response.code)
+                errorMessage = if (!response.success) response.description else null
             )
         }
     }
@@ -69,7 +52,7 @@ class AppointmentViewModel @Inject constructor(
                 uiState = uiState.copy(
                     appointments = response.data ?: emptyList(),
                     isLoading = false,
-                    errorMessage = errorMessageMapper.map(response.code)
+                    errorMessage = if (!response.success) response.description else null
                 )
             }
         }
