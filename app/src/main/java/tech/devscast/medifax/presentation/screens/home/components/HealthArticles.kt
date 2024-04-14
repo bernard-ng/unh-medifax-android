@@ -50,7 +50,7 @@ fun HealthArticles() {
     ) {
         val context = LocalContext.current
 
-        Text("Health article", fontWeight = FontWeight.Bold, fontSize = 24.sp)
+        Text("Votre santé avant tout", fontWeight = FontWeight.Bold, fontSize = 24.sp)
         Spacer(modifier = Modifier.height(8.dp))
         articles.forEach { (title, date) ->
             Card(
@@ -65,18 +65,6 @@ fun HealthArticles() {
                     modifier = Modifier
                         .padding(16.dp)
                 ) {
-                    Box(modifier = Modifier
-                        .clip(MaterialTheme.shapes.medium)
-                        .shadow(4.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.profil),
-                            contentDescription = "Article Image",
-                            modifier = Modifier
-                                .size(88.dp)
-                        )
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
                     Column (
                         verticalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier

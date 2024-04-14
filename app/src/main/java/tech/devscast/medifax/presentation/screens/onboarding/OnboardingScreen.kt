@@ -84,7 +84,7 @@ fun OnBoardingScreen(
         ) {
             Button(
                 onClick = {
-                    viewModel.saveOnBoardingState(true)
+                    viewModel.onboardingCompleted()
                     onBoardingCompleted()
                 },
                 shape = MaterialTheme.shapes.medium,

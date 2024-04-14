@@ -1,14 +1,11 @@
 package tech.devscast.medifax.presentation.screens.profile
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import tech.devscast.medifax.presentation.components.EmptyState
+import tech.devscast.medifax.presentation.components.ProgressLoader
 import tech.devscast.medifax.presentation.navigation.BottomNavigationBar
 import tech.devscast.medifax.presentation.screens.profile.components.AppointmentItem
 import tech.devscast.medifax.presentation.theme.MedifaxTheme
@@ -43,7 +40,7 @@ fun AppointmentScreen(
          * Trigger the request when [AppointmentScreen] become visible
          * That's why [AppointmentViewModel.fetchAppointment] is called inside [LaunchedEffect]
          */
-        viewModel.fetchAppointment(patientId = "3")
+        viewModel.fetchAppointment()
     }
 
     val uiState = viewModel.uiState
@@ -64,37 +61,33 @@ fun AppointmentScreen(
         },
         bottomBar = { BottomNavigationBar(navController) }
     ) { contentPadding ->
+        when {
+            uiState.isLoading -> {
+                ProgressLoader()
+            }
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(contentPadding),
-            contentAlignment = Alignment.Center,
-            content = {
-                when {
-                    uiState.isLoading -> {
-                        CircularProgressIndicator()
-                    }
+            uiState.errorMessage != null -> {
+                EmptyState(message = "Un problème est survenue")
+                Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT)
+                    .show()
+            }
 
-                    uiState.errorMessage != null -> {
-                        EmptyState(message = "Un problème est survenue")
-                        Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT).show()
-                    }
-
-                    else -> {
-                        if (uiState.appointments.isEmpty()) {
-                            EmptyState(message = "Vous n'avez pris aucun rendez-vous pour l'instant")
-                        } else {
-                            LazyColumn(modifier = Modifier.padding(32.dp)) {
-                                items(uiState.appointments) { appointment ->
-                                    AppointmentItem(appointment)
-                                }
-                            }
+            else -> {
+                if (uiState.appointments.isEmpty()) {
+                    EmptyState(message = "Vous n'avez pris aucun rendez-vous pour l'instant")
+                } else {
+                    LazyColumn(
+                        modifier = Modifier
+                            .padding(contentPadding)
+                            .padding(32.dp)
+                    ) {
+                        items(uiState.appointments) { appointment ->
+                            AppointmentItem(appointment)
                         }
                     }
                 }
             }
-        )
+        }
     }
 }
 

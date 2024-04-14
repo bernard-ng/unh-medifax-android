@@ -39,6 +39,7 @@ import androidx.navigation.compose.rememberNavController
 import tech.devscast.medifax.data.entity.Doctor
 import tech.devscast.medifax.data.entity.Specialization
 import tech.devscast.medifax.presentation.components.EmptyState
+import tech.devscast.medifax.presentation.components.ProgressLoader
 import tech.devscast.medifax.presentation.viewmodel.DoctorDetailViewModel
 import tech.devscast.medifax.presentation.navigation.BottomNavigationBar
 import tech.devscast.medifax.presentation.screens.doctor.components.DoctorListItem
@@ -84,12 +85,13 @@ fun DoctorDetailScreen(
         ) {
             when {
                 uiState.isLoading -> {
-                    CircularProgressIndicator()
+                    ProgressLoader()
                 }
 
                 uiState.errorMessage != null -> {
                     EmptyState(message = "Un problème est survenue")
-                    Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT)
+                        .show()
                 }
 
                 uiState.doctor != null -> {
@@ -136,7 +138,7 @@ fun DoctorDetailScreen(
                         enabled = uiState.doctor.isAvailable
                     ) {
                         Text(
-                            text = "Réservez un rendez-vous",
+                            text = "Prendre un rendez-vous",
                             fontSize = 16.sp,
                             modifier = Modifier.padding(6.dp)
                         )

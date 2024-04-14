@@ -41,5 +41,17 @@ fun AuthenticatedNavGraph() {
                 navController = navController
             )
         }
+
+        composable(route = Destination.Logout.route) {
+            DefaultNavGraph(startDestination = Destination.SignIn.route)
+        }
+
+        composable(route = Destination.SignIn.route) {
+            DefaultNavGraph(startDestination = Destination.SignIn.route)
+        }
+
+        composable(route = Destination.SignUp.route) {
+            DefaultNavGraph(startDestination = Destination.SignUp.route)
+        }
     }
 }

@@ -21,26 +21,37 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import tech.devscast.medifax.presentation.components.ProgressLoader
 import tech.devscast.medifax.presentation.navigation.BottomNavigationBar
 import tech.devscast.medifax.presentation.navigation.Destination
 import tech.devscast.medifax.presentation.screens.home.components.HealthArticles
 import tech.devscast.medifax.presentation.screens.home.components.HeroSection
 import tech.devscast.medifax.presentation.screens.home.components.ServiceButton
 import tech.devscast.medifax.presentation.theme.MedifaxTheme
+import tech.devscast.medifax.presentation.viewmodel.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    navController: NavController = rememberNavController()
+    navController: NavController = rememberNavController(),
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(key1 = viewModel) {
+        viewModel.fetchCurrentUser()
+    }
+
+    val uiState = viewModel.uiState
+
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Medifax") })
@@ -53,7 +64,25 @@ fun HomeScreen(
                 .padding(paddingValues)
                 .background(Color(0xFFD5ECF4))
         ) {
-            HeroSection()
+            when {
+                uiState.errorMessage != null -> {
+                    Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_LONG)
+                        .show()
+                }
+
+                !uiState.isLoggedIn -> {
+                    navController.navigate(Destination.SignIn.route)
+                }
+
+                uiState.isLoading -> {
+                    ProgressLoader()
+                }
+
+                uiState.patient != null -> {
+                    HeroSection(uiState.patient)
+                }
+            }
+
             Column(
                 modifier = Modifier
                     .clip(RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp))

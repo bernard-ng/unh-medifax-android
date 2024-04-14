@@ -35,10 +35,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -48,7 +50,10 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import tech.devscast.medifax.R
+import tech.devscast.medifax.presentation.components.ProgressLoader
 import tech.devscast.medifax.presentation.navigation.BottomNavigationBar
 import tech.devscast.medifax.presentation.navigation.Destination
 import tech.devscast.medifax.presentation.screens.profile.components.ListItem
@@ -62,6 +67,12 @@ fun ProfileScreen(
     navController: NavController = rememberNavController(),
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(key1 = viewModel) {
+        viewModel.fetchCurrentUser()
+    }
+
+    val uiState = viewModel.uiState
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -84,27 +95,39 @@ fun ProfileScreen(
                 .padding(32.dp)
                 .fillMaxSize()
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.primary)
-                        .size(100.dp)
-                        .border(BorderStroke(5.dp, MaterialTheme.colorScheme.primary), CircleShape)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.doctor_svgrepo_com),
-                        contentDescription = "Profile picture",
-                        modifier = Modifier.size(100.dp)
-                    )
+            when {
+                !uiState.isLoggedIn -> { navController.navigate(Destination.SignIn.route) }
+                uiState.isLoading -> { ProgressLoader() }
+                uiState.patient != null -> {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colorScheme.primary)
+                                .size(100.dp)
+                                .border(BorderStroke(5.dp, MaterialTheme.colorScheme.primary), CircleShape)
+                        ) {
+                            AsyncImage(
+                                model = ImageRequest.Builder(context = LocalContext.current)
+                                    .data("https://medifax.devscast.tech/uploads/${uiState.patient.profileImage}")
+                                    .crossfade(true)
+                                    .build(),
+                                contentDescription = uiState.patient.fullName,
+                                placeholder = painterResource(id = R.drawable.doctor_svgrepo_com),
+                                error = painterResource(id = R.drawable.doctor_svgrepo_com),
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.size(100.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(24.dp))
+                        Text(uiState.patient.fullName, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                    }
                 }
-                Spacer(modifier = Modifier.height(24.dp))
-                Text("The Don Dan", fontSize = 24.sp, fontWeight = FontWeight.Bold)
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -149,7 +172,10 @@ fun ProfileScreen(
                 ListItem(
                     text = "Logout",
                     icon = Icons.AutoMirrored.Filled.Logout,
-                    onClick = { navController.navigate(Destination.Logout.route) }
+                    onClick = {
+                        viewModel.logout()
+                        navController.navigate(Destination.Logout.route)
+                    }
                 )
             }
         }

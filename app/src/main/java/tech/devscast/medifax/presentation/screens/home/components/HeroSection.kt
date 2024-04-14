@@ -21,14 +21,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import tech.devscast.medifax.R
+import tech.devscast.medifax.data.entity.Doctor
+import tech.devscast.medifax.data.entity.Patient
 
 @Composable
-fun HeroSection() {
+fun HeroSection(patient: Patient) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,12 +51,16 @@ fun HeroSection() {
                     .size(100.dp)
                     .border(BorderStroke(5.dp, MaterialTheme.colorScheme.primary), CircleShape)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.doctor_svgrepo_com),
-                    contentDescription = "Profile",
-                    modifier = Modifier
-                        .size(100.dp)
-                        .clip(CircleShape)
+                AsyncImage(
+                    model = ImageRequest.Builder(context = LocalContext.current)
+                        .data("https://medifax.devscast.tech/uploads/${patient.profileImage}")
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = patient.fullName,
+                    placeholder = painterResource(id = R.drawable.doctor_svgrepo_com),
+                    error = painterResource(id = R.drawable.doctor_svgrepo_com),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.size(100.dp)
                 )
             }
             Spacer(modifier = Modifier.height(24.dp))
@@ -61,7 +71,7 @@ fun HeroSection() {
                 color = Color(0xFF221F1F)
             )
             Text(
-                "Henriette",
+                text = patient.fullName,
                 fontSize = 24.sp,
                 color = Color(0xFF221F1F)
             )

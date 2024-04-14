@@ -10,4 +10,5 @@ object Endpoints {
     const val APPOINTMENT = "$BASE_URL/appointments"
     const val PATIENT_APPOINTMENTS = "$BASE_URL/appointments/patient/{id}"
     const val REGISTER = "$BASE_URL/register"
+    const val ME = "$BASE_URL/me"
 }

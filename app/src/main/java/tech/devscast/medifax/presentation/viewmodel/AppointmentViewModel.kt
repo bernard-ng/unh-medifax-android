@@ -1,5 +1,6 @@
 package tech.devscast.medifax.presentation.viewmodel
 
+import android.content.SharedPreferences
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import tech.devscast.medifax.data.entity.Appointment
+import tech.devscast.medifax.domain.PreferencesKeys
 import tech.devscast.medifax.domain.repository.AppointmentRepository
 import javax.inject.Inject
 
@@ -22,19 +24,17 @@ data class AppointmentViewState(
 
 @HiltViewModel
 class AppointmentViewModel @Inject constructor(
-    private val repository: AppointmentRepository
+    private val repository: AppointmentRepository,
+    private val preferences: SharedPreferences
 ) : ViewModel() {
 
     var uiState by mutableStateOf(AppointmentViewState())
         private set
 
-    fun createAppointment(
-        patientId: String,
-        doctorId: String,
-        description: String,
-        date: String
-    ) {
+    fun createAppointment(doctorId: String, description: String, date: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            val patientId = preferences.getString(PreferencesKeys.CURRENT_USER_ID, "0")!!
+
             uiState = uiState.copy(isLoading = true, errorMessage = null)
             val response = repository.createAppointment(patientId, doctorId, description, date)
             uiState = uiState.copy(
@@ -45,8 +45,10 @@ class AppointmentViewModel @Inject constructor(
         }
     }
 
-    fun fetchAppointment(patientId: String) {
+    fun fetchAppointment() {
         viewModelScope.launch(Dispatchers.IO) {
+            val patientId = preferences.getString(PreferencesKeys.CURRENT_USER_ID, "0")!!
+
             uiState = uiState.copy(isLoading = true, errorMessage = null)
             repository.findForPatient(patientId = patientId).collectLatest { response ->
                 uiState = uiState.copy(

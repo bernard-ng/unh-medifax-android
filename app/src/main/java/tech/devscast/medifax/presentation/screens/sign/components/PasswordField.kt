@@ -18,7 +18,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 
 @Composable
-fun PasswordField(password: String, isPasswordVisible: Boolean, onValueChange: (String) -> Unit, onTogglePassword: () -> Unit) {
+fun PasswordField(password: String, isPasswordVisible: Boolean, onValueChange: (String) -> Unit, onTogglePassword: () -> Unit, enabled: Boolean = true) {
     OutlinedTextField(
         value = password,
         onValueChange = { onValueChange(it) },
@@ -29,6 +29,7 @@ fun PasswordField(password: String, isPasswordVisible: Boolean, onValueChange: (
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
+        enabled = enabled,
         trailingIcon = {
             IconButton(onClick = { onTogglePassword() }) {
                 Icon(

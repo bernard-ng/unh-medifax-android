@@ -35,3 +35,18 @@ fun Destination.withArgument(arg: String): String {
 fun getBottomNavigationDestinations(): List<Destination> {
     return listOf(Destination.Home, Destination.Appointment, Destination.Profile)
 }
+
+fun getStartDestination(isOnboardingCompleted: Boolean, isLoggedIn: Boolean): Destination {
+
+    val destination: Destination = if (isOnboardingCompleted) {
+        if (isLoggedIn) {
+            Destination.AuthenticatedNavHost
+        } else {
+            Destination.GetStarted
+        }
+    } else {
+        Destination.OnBoarding
+    }
+
+    return destination
+}

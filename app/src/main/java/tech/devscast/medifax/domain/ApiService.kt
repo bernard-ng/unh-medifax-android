@@ -4,7 +4,6 @@ import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
@@ -30,30 +29,5 @@ interface ApiService {
     suspend fun createAppointment(data: CreateAppointmentRequest): Response<Appointment?>
     suspend fun login(data: LoginCheckRequest): Response<LoginCheckResponse?>
     suspend fun register(data: RegisterRequest): Response<Patient?>
-
-    companion object {
-        fun create(): ApiService {
-            return ApiServiceImpl(
-                client = HttpClient(Android) {
-                    install(ContentNegotiation) {
-                        json(Json {
-                            ignoreUnknownKeys = true
-                        })
-                    }
-                    install(Logging) {
-                        logger = object: Logger {
-                            override fun log(message: String) {
-                                Log.i("KTOR", message)
-                            }
-                        }
-                        level = LogLevel.ALL
-                        filter { request ->
-                            request.url.host.contains("medifax.devscast.tech")
-                        }
-                        sanitizeHeader { header -> header == HttpHeaders.Authorization }
-                    }
-                }
-            )
-        }
-    }
+    suspend fun me(): Response<Patient?>
 }

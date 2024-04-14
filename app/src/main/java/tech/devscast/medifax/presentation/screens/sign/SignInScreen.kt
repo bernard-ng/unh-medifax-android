@@ -1,5 +1,6 @@
 package tech.devscast.medifax.presentation.screens.sign
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,6 +43,8 @@ fun SignInScreen(
     var password by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
 
+    val uiState = viewModel.uiState
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,14 +53,30 @@ fun SignInScreen(
     ) {
         HeadingTitle("Connexion", modifier = Modifier.align(Alignment.Start))
 
-        EmailField(email, onValueChange = { email = it })
+        EmailField(email, onValueChange = { email = it }, enabled = !uiState.isLoading)
         Spacer(modifier = Modifier.height(16.dp))
         PasswordField(
             password,
             isPasswordVisible,
             onValueChange = { password = it },
-            onTogglePassword = { isPasswordVisible = !isPasswordVisible }
+            onTogglePassword = { isPasswordVisible = !isPasswordVisible },
+            enabled = !uiState.isLoading
         )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        when {
+            uiState.errorMessage != null -> {
+                AnimatedVisibility(visible = true) {
+                    Text(
+                        text = uiState.errorMessage.toString(),
+                        color = MaterialTheme.colorScheme.error,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+            uiState.token != null -> { onSignInCompleted() }
+        }
+
         Spacer(modifier = Modifier.weight(1f))
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -65,21 +86,36 @@ fun SignInScreen(
                 .wrapContentSize(align = Alignment.BottomCenter)
         ) {
             Button(
-                onClick = { onSignInCompleted() },
+                onClick = {
+                     viewModel.login(email, password)
+                },
                 modifier = Modifier.fillMaxWidth(),
-                shape = MaterialTheme.shapes.medium
+                shape = MaterialTheme.shapes.medium,
+                enabled = !uiState.isLoading
             ) {
-                Text(
-                    text = "Se connecter",
-                    fontSize = 17.sp,
-                    modifier = Modifier.padding(6.dp)
-                )
+                when {
+                    uiState.isLoading -> {
+                        Text(
+                            text = "Connexion...",
+                            fontSize = 17.sp,
+                            modifier = Modifier.padding(6.dp)
+                        )
+                    }
+                    else -> {
+                        Text(
+                            text = "Se connecter",
+                            fontSize = 17.sp,
+                            modifier = Modifier.padding(6.dp)
+                        )
+                    }
+                }
             }
             Spacer(modifier = Modifier.height(8.dp))
             FilledTonalButton(
                 onClick = { onSignUpClicked() },
                 modifier = Modifier.fillMaxWidth(),
-                shape = MaterialTheme.shapes.medium
+                shape = MaterialTheme.shapes.medium,
+                enabled = !uiState.isLoading
             ) {
                 Text(
                     text = "S'inscrire",

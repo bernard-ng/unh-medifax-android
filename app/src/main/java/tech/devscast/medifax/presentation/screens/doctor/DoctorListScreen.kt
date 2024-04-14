@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -24,6 +23,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import tech.devscast.medifax.data.entity.Doctor
 import tech.devscast.medifax.presentation.components.EmptyState
+import tech.devscast.medifax.presentation.components.ProgressLoader
 import tech.devscast.medifax.presentation.navigation.BottomNavigationBar
 import tech.devscast.medifax.presentation.navigation.Destination
 import tech.devscast.medifax.presentation.navigation.withArgument
@@ -61,12 +61,13 @@ fun DoctorListScreen(
     ) { contentPadding ->
         when {
             uiState.isLoading -> {
-                CircularProgressIndicator()
+                ProgressLoader()
             }
 
             uiState.errorMessage != null -> {
                 EmptyState(message = "Un problème est survenue")
-                Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT).show()
+                Toast.makeText(LocalContext.current, uiState.errorMessage, Toast.LENGTH_SHORT)
+                    .show()
             }
 
             else -> {

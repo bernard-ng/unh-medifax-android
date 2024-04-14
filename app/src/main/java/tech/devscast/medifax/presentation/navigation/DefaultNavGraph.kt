@@ -1,9 +1,11 @@
 package tech.devscast.medifax.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import tech.devscast.medifax.presentation.screens.GetStartedScreen
 import tech.devscast.medifax.presentation.screens.sign.SignInScreen
 import tech.devscast.medifax.presentation.screens.sign.SignUpScreen
@@ -11,7 +13,7 @@ import tech.devscast.medifax.presentation.screens.onboarding.OnBoardingScreen
 
 @Composable
 fun DefaultNavGraph(
-    navController: NavHostController,
+    navController: NavHostController = rememberNavController(),
     startDestination: String
 ) {
     NavHost(

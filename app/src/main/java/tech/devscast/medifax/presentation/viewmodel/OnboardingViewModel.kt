@@ -1,20 +1,26 @@
 package tech.devscast.medifax.presentation.viewmodel
 
+import android.content.SharedPreferences
+import android.util.Log
+import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import tech.devscast.medifax.domain.repository.DataStoreRepository
+import tech.devscast.medifax.domain.PreferencesKeys
 import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
-    private val repository: DataStoreRepository
+    private val preferences: SharedPreferences
 ) : ViewModel() {
-    fun saveOnBoardingState(completed: Boolean) {
+    fun onboardingCompleted() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.saveOnBoardingState(completed)
+            preferences.edit {
+                putBoolean(PreferencesKeys.IS_ONBOARDING_COMPLETED, true)
+            }
+            Log.i("MEDIFAX", "onboard completed saved")
         }
     }
 }
