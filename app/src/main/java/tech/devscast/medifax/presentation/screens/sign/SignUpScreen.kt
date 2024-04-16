@@ -1,5 +1,6 @@
 package tech.devscast.medifax.presentation.screens.sign
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -32,10 +34,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import tech.devscast.medifax.presentation.screens.sign.components.EmailField
+import tech.devscast.medifax.presentation.screens.sign.components.EmailValidable
 import tech.devscast.medifax.presentation.screens.sign.components.HeadingTitle
+import tech.devscast.medifax.presentation.screens.sign.components.NotEmptyValidable
 import tech.devscast.medifax.presentation.screens.sign.components.PasswordField
 import tech.devscast.medifax.presentation.theme.MedifaxTheme
 import tech.devscast.medifax.presentation.viewmodel.SignUpViewModel
+import tech.devscast.medifax.presentation.screens.sign.components.BaseValidable
+import tech.devscast.medifax.presentation.screens.sign.components.withValidable
 
 @Composable
 fun SignUpScreen(
@@ -48,6 +54,11 @@ fun SignUpScreen(
     var password by remember { mutableStateOf("") }
     var checked by remember { mutableStateOf(false) }
     var isPasswordVisible by remember { mutableStateOf(false) }
+    val emailValidable = EmailValidable()
+    val nameValidable = NotEmptyValidable()
+    emailValidable.value =  email
+    nameValidable.value = name
+
 
     Scaffold { contentPadding ->
         Column(
@@ -68,14 +79,24 @@ fun SignUpScreen(
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.medium,
             )
+            Text(
+                text = nameValidable.errorMessage ?: "",
+                modifier = Modifier.fillMaxWidth(),
+                style = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.error)
+            )
             Spacer(modifier = Modifier.height(16.dp))
             EmailField(email, onValueChange = { email = it })
+            Text(
+                text = emailValidable.errorMessage ?: "",
+                modifier = Modifier.fillMaxWidth(),
+                style = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.error)
+            )
             Spacer(modifier = Modifier.height(16.dp))
             PasswordField(
                 password,
                 isPasswordVisible,
                 onValueChange = { password = it },
-                onTogglePassword = { isPasswordVisible = !isPasswordVisible }
+                onTogglePassword = { isPasswordVisible = !isPasswordVisible },
             )
             Spacer(modifier = Modifier.height(16.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -98,8 +119,10 @@ fun SignUpScreen(
             ) {
                 Button(
                     onClick = {
-                        viewModel.register(email, password, name)
-                        onSignUpCompleted()
+                        withValidable(emailValidable, nameValidable){
+                            viewModel.register(email, password, name)
+                            onSignUpCompleted()
+                        }
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = MaterialTheme.shapes.medium

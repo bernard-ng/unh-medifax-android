@@ -46,7 +46,7 @@ fun DefaultNavGraph(
         composable(route = Destination.SignUp.route) {
             SignUpScreen(
                 onSignInClicked = { navController.navigate(Destination.SignIn.route) },
-                onSignUpCompleted = { navController.navigate(Destination.AuthenticatedNavHost.route) }
+                onSignUpCompleted = { navController.navigate(Destination.SignIn.route) }
             )
         }
 

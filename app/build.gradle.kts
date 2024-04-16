@@ -93,6 +93,9 @@ dependencies {
     implementation(libs.ktor.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.kotlinx.serialization.json)
+
+    //validable
+    implementation ("com.github.devscast:validable:1.3.0")
 }
 
 kapt {
