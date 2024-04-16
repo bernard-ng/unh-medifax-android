@@ -33,10 +33,8 @@ class AppointmentViewModel @Inject constructor(
 
     fun createAppointment(doctorId: String, description: String, date: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val patientId = preferences.getString(PreferencesKeys.CURRENT_USER_ID, "0")!!
-
             uiState = uiState.copy(isLoading = true, errorMessage = null)
-            val response = repository.createAppointment(patientId, doctorId, description, date)
+            val response = repository.createAppointment(doctorId, description, date)
             uiState = uiState.copy(
                 isLoading = false,
                 createdAppointment = response.data,
@@ -47,10 +45,8 @@ class AppointmentViewModel @Inject constructor(
 
     fun fetchAppointment() {
         viewModelScope.launch(Dispatchers.IO) {
-            val patientId = preferences.getString(PreferencesKeys.CURRENT_USER_ID, "0")!!
-
             uiState = uiState.copy(isLoading = true, errorMessage = null)
-            repository.findForPatient(patientId = patientId).collectLatest { response ->
+            repository.findForPatient().collectLatest { response ->
                 uiState = uiState.copy(
                     appointments = response.data ?: emptyList(),
                     isLoading = false,

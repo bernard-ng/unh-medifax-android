@@ -25,7 +25,7 @@ interface ApiService {
     suspend fun getDoctor(id: String): Response<Doctor?>
     suspend fun getDoctors(): Response<List<Doctor>?>
     suspend fun getPatient(id: String): Response<Patient?>
-    suspend fun getPatientAppointments(id: String): Response<List<Appointment>?>
+    suspend fun getPatientAppointments(): Response<List<Appointment>?>
     suspend fun createAppointment(data: CreateAppointmentRequest): Response<Appointment?>
     suspend fun login(data: LoginCheckRequest): Response<LoginCheckResponse?>
     suspend fun register(data: RegisterRequest): Response<Patient?>

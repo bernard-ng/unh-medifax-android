@@ -33,10 +33,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             uiState = uiState.copy(isLoading = true, errorMessage = null)
             uiState = try {
-                val userId = preferences.getString(PreferencesKeys.CURRENT_USER_ID, null)
-                    ?: throw Exception("Désolé vous n'êtes plus connecté")
-
-                val response = repository.find(userId)
+                val response = repository.me()
                 uiState.copy(
                     patient = response.data,
                     isLoading = false,

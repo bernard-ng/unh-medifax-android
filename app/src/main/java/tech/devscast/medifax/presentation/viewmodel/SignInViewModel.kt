@@ -35,7 +35,6 @@ class SignInViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             uiState = uiState.copy(isLoading = true, errorMessage = null)
             val response = getJwtTokenOnSuccess(email, password)
-            saveLoggedInState()
 
             uiState = uiState.copy(
                 token = response.data?.token,
@@ -57,15 +56,5 @@ class SignInViewModel @Inject constructor(
         }
 
         return response
-    }
-
-    private suspend fun saveLoggedInState() {
-        val response = repository.me()
-
-        if (response.success && response.data != null) {
-            preferences.edit {
-                putString(PreferencesKeys.CURRENT_USER_ID, response.data.id.toString())
-            }
-        }
     }
 }

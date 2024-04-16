@@ -13,13 +13,11 @@ class AppointmentRepositoryImpl @Inject constructor(
     private val api: ApiService
 ): AppointmentRepository {
     override suspend fun createAppointment(
-        patientId: String,
         doctorId: String,
         description: String,
         date: String
     ): Response<Appointment?> {
         val data = CreateAppointmentRequest(
-            patient = CreateAppointmentRequest.Identifier(patientId),
             doctor = CreateAppointmentRequest.Identifier(doctorId),
             description = description,
             date = date
@@ -28,9 +26,9 @@ class AppointmentRepositoryImpl @Inject constructor(
         return api.createAppointment(data)
     }
 
-    override fun findForPatient(patientId: String): Flow<Response<List<Appointment>?>> {
+    override fun findForPatient(): Flow<Response<List<Appointment>?>> {
         return flow {
-            val response = api.getPatientAppointments(patientId)
+            val response = api.getPatientAppointments()
             emit(response)
         }
     }

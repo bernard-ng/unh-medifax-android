@@ -63,10 +63,9 @@ class ApiServiceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getPatientAppointments(id: String): Response<List<Appointment>?> {
+    override suspend fun getPatientAppointments(): Response<List<Appointment>?> {
         return tryRequest {
-            val url = Endpoints.PATIENT_APPOINTMENTS.replace("{id}", id)
-            val appointment: List<Appointment> = client.get(url) {
+            val appointment: List<Appointment> = client.get(Endpoints.PATIENT_APPOINTMENTS) {
                 bearerAuth(token.toString())
                 contentType(ContentType.Application.Json)
             }.body()

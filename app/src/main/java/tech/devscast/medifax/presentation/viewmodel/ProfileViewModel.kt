@@ -35,10 +35,7 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             uiState = uiState.copy(isLoading = true, errorMessage = null)
             uiState = try {
-                val userId = preferences.getString(PreferencesKeys.CURRENT_USER_ID, null)
-                    ?: throw Exception("Désolé vous n'êtes plus connecté")
-
-                val response = repository.find(userId)
+                val response = repository.me()
                 uiState.copy(
                     patient = response.data,
                     isLoading = false,
@@ -58,7 +55,6 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             preferences.edit {
                 putBoolean(PreferencesKeys.IS_LOGGED_IN, false)
-                putString(PreferencesKeys.CURRENT_USER_ID, null)
                 putString(PreferencesKeys.JWT_TOKEN, null)
             }
         }
