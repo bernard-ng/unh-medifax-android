@@ -18,7 +18,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 
 @Composable
-fun PasswordField(password: String, isPasswordVisible: Boolean, onValueChange: (String) -> Unit, onTogglePassword: () -> Unit, enabled: Boolean = true) {
+fun PasswordField(
+    password: String,
+    isPasswordVisible: Boolean,
+    onValueChange: (String) -> Unit,
+    onTogglePassword: () -> Unit,
+    enabled: Boolean = true,
+    isError: Boolean = false
+) {
     OutlinedTextField(
         value = password,
         onValueChange = { onValueChange(it) },
@@ -37,6 +44,7 @@ fun PasswordField(password: String, isPasswordVisible: Boolean, onValueChange: (
                     contentDescription = null
                 )
             }
-        }
+        },
+        isError = isError
     )
 }

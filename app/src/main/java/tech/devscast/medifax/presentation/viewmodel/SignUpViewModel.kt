@@ -1,34 +1,41 @@
 package tech.devscast.medifax.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import tech.devscast.medifax.data.entity.Patient
 import tech.devscast.medifax.domain.repository.PatientRepository
 import javax.inject.Inject
 
-sealed class RegistrationStatus{
-    object Success : RegistrationStatus()
-    object Error : RegistrationStatus()
-}
+data class SignUpViewState(
+    val patient: Patient? = null,
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null
+)
+
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val repository: PatientRepository
 ): ViewModel() {
-    private val _registrationsStatus = MutableLiveData<RegistrationStatus>()
-    val registrationStatus: LiveData<RegistrationStatus> get() = _registrationsStatus
+
+    var uiState by mutableStateOf(SignUpViewState())
+        private set
 
     fun register(email: String, password: String, fullName: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            uiState = uiState.copy(isLoading = true, errorMessage = null)
             val response = repository.register(email, password, fullName)
-            if (response.success){
-                _registrationsStatus.postValue(RegistrationStatus.Success)
-            } else {
-                _registrationsStatus.postValue(RegistrationStatus.Error)
-            }
+
+            uiState = uiState.copy(
+                patient = response.data,
+                isLoading = false,
+                errorMessage = if (!response.success) response.description else null
+            )
         }
     }
 }

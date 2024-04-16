@@ -1,7 +1,6 @@
 package tech.devscast.medifax.presentation.viewmodel
 
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -53,6 +52,7 @@ class SignInViewModel @Inject constructor(
 
             preferences.edit {
                 putString(PreferencesKeys.JWT_TOKEN, token)
+                putBoolean(PreferencesKeys.IS_LOGGED_IN, true)
             }
         }
 
@@ -65,10 +65,7 @@ class SignInViewModel @Inject constructor(
         if (response.success && response.data != null) {
             preferences.edit {
                 putString(PreferencesKeys.CURRENT_USER_ID, response.data.id.toString())
-                putBoolean(PreferencesKeys.IS_LOGGED_IN, true)
             }
-            Log.i("MEDIFAX", response.data.id.toString())
-            Log.i("MEDIFAX", "Saved current user id")
         }
     }
 }

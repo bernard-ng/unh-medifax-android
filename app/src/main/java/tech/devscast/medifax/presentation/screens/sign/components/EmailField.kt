@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 
 @Composable
-fun EmailField(email: String, onValueChange: (String) -> Unit, enabled: Boolean = true) {
+fun EmailField(email: String, onValueChange: (String) -> Unit, enabled: Boolean = true, isError: Boolean = false) {
     OutlinedTextField(
         value = email,
         onValueChange = { onValueChange(it) },
@@ -23,6 +23,7 @@ fun EmailField(email: String, onValueChange: (String) -> Unit, enabled: Boolean 
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         shape = MaterialTheme.shapes.medium,
-        enabled = enabled
+        enabled = enabled,
+        isError = isError
     )
 }

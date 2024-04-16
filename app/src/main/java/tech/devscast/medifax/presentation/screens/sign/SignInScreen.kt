@@ -32,6 +32,8 @@ import tech.devscast.medifax.presentation.screens.sign.components.HeadingTitle
 import tech.devscast.medifax.presentation.screens.sign.components.PasswordField
 import tech.devscast.medifax.presentation.theme.MedifaxTheme
 import tech.devscast.medifax.presentation.viewmodel.SignInViewModel
+import tech.devscast.validable.EmailValidable
+import tech.devscast.validable.withValidable
 
 @Composable
 fun SignInScreen(
@@ -39,7 +41,7 @@ fun SignInScreen(
     onSignInCompleted: () -> Unit,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
-    var email by remember { mutableStateOf("") }
+    val email = remember { EmailValidable() }
     var password by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
 
@@ -53,7 +55,12 @@ fun SignInScreen(
     ) {
         HeadingTitle("Connexion", modifier = Modifier.align(Alignment.Start))
 
-        EmailField(email, onValueChange = { email = it }, enabled = !uiState.isLoading)
+        EmailField(
+            email.value,
+            onValueChange = { email.value = it },
+            enabled = !uiState.isLoading,
+            isError = email.hasError()
+        )
         Spacer(modifier = Modifier.height(16.dp))
         PasswordField(
             password,
@@ -87,7 +94,9 @@ fun SignInScreen(
         ) {
             Button(
                 onClick = {
-                     viewModel.login(email, password)
+                    withValidable(email) {
+                        viewModel.login(email.value, password)
+                    }
                 },
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.medium,

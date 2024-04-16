@@ -95,7 +95,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     //validable
-    implementation ("com.github.devscast:validable:1.3.0")
+    implementation (libs.validable)
 }
 
 kapt {
