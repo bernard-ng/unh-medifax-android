@@ -1,7 +1,7 @@
 package tech.devscast.medifax.presentation.screens.doctor
 
+import android.annotation.SuppressLint
 import android.widget.Toast
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,15 +35,19 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import tech.devscast.medifax.data.entity.Doctor
-import tech.devscast.medifax.data.entity.Specialization
 import tech.devscast.medifax.presentation.components.EmptyState
 import tech.devscast.medifax.presentation.components.ProgressLoader
-import tech.devscast.medifax.presentation.viewmodel.DoctorDetailViewModel
 import tech.devscast.medifax.presentation.navigation.BottomNavigationBar
 import tech.devscast.medifax.presentation.screens.doctor.components.DoctorListItem
 import tech.devscast.medifax.presentation.theme.MedifaxTheme
 import tech.devscast.medifax.presentation.theme.poppinsFontFamily
+import tech.devscast.medifax.presentation.viewmodel.DoctorDetailViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale.getDefault
+
+@SuppressLint("ConstantLocale")
+val dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", getDefault())
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,6 +64,7 @@ fun DoctorDetailScreen(
 
 
     var message by remember { mutableStateOf("") }
+    var selectedDate by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -95,7 +99,7 @@ fun DoctorDetailScreen(
                 }
 
                 uiState.doctor != null -> {
-                    DoctorListItem(doctor = uiState.doctor, {})
+                    DoctorListItem(doctor = uiState.doctor) {}
                     Spacer(modifier = Modifier.height(20.dp))
                     Text(
                         text = "A propos",
@@ -111,26 +115,36 @@ fun DoctorDetailScreen(
                         modifier = Modifier.fillMaxWidth()
                     )
 
+                    //Spacer(modifier = Modifier.height(12.dp))
                     Spacer(modifier = Modifier.weight(1f))
-                    AnimatedVisibility(visible = uiState.doctor.isAvailable) {
-                        OutlinedTextField(
-                            value = message,
-                            onValueChange = { if (it.length <= 255) message = it },
-                            label = { Text(text = "Description") },
-                            modifier = Modifier
-                                .height(150.dp)
-                                .fillMaxWidth(),
-                            supportingText = {
-                                Text(
-                                    text = "${message.length} / 255",
-                                    modifier = Modifier.fillMaxWidth(),
-                                    textAlign = TextAlign.End
-                                )
-                            },
-                            shape = MaterialTheme.shapes.medium,
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(24.dp))
+                    OutlinedTextField(
+                        value = selectedDate,
+                        onValueChange = {
+                            selectedDate = it
+                        },
+                        label = { Text(text = "Date et Heure") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    // AnimatedVisibility(visible = uiState.doctor.isAvailable) {
+                    OutlinedTextField(
+                        value = message,
+                        onValueChange = { if (it.length <= 255) message = it },
+                        label = { Text(text = "Description") },
+                        modifier = Modifier
+                            .height(150.dp)
+                            .fillMaxWidth(),
+                        supportingText = {
+                            Text(
+                                text = "${message.length} / 255",
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.End
+                            )
+                        },
+                        shape = MaterialTheme.shapes.medium,
+                    )
+                    // }
+                    Spacer(modifier = Modifier.height(10.dp))
                     Button(
                         onClick = {},
                         modifier = Modifier.fillMaxWidth(),
