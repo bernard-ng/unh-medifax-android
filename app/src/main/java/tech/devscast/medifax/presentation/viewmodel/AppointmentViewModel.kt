@@ -31,18 +31,6 @@ class AppointmentViewModel @Inject constructor(
     var uiState by mutableStateOf(AppointmentViewState())
         private set
 
-    fun createAppointment(doctorId: String, description: String, date: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            uiState = uiState.copy(isLoading = true, errorMessage = null)
-            val response = repository.createAppointment(doctorId, description, date)
-            uiState = uiState.copy(
-                isLoading = false,
-                createdAppointment = response.data,
-                errorMessage = if (!response.success) response.description else null
-            )
-        }
-    }
-
     fun fetchAppointment() {
         viewModelScope.launch(Dispatchers.IO) {
             uiState = uiState.copy(isLoading = true, errorMessage = null)
