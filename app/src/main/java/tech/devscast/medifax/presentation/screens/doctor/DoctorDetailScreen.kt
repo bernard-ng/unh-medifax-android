@@ -1,6 +1,5 @@
 package tech.devscast.medifax.presentation.screens.doctor
 
-import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -39,14 +38,13 @@ import tech.devscast.medifax.presentation.components.EmptyState
 import tech.devscast.medifax.presentation.components.ProgressLoader
 import tech.devscast.medifax.presentation.navigation.BottomNavigationBar
 import tech.devscast.medifax.presentation.screens.doctor.components.DoctorListItem
+import tech.devscast.medifax.presentation.screens.profile.components.AppointmentScreen
+import tech.devscast.medifax.presentation.screens.profile.components.ConfirmationDialog
 import tech.devscast.medifax.presentation.theme.MedifaxTheme
 import tech.devscast.medifax.presentation.theme.poppinsFontFamily
 import tech.devscast.medifax.presentation.viewmodel.DoctorDetailViewModel
-import java.text.SimpleDateFormat
-import java.util.Locale.getDefault
-
-@SuppressLint("ConstantLocale")
-val dateTimeFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", getDefault())
+import tech.devscast.validable.NotEmptyValidable
+import tech.devscast.validable.withValidable
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,16 +53,18 @@ fun DoctorDetailScreen(
     doctorId: String,
     navController: NavController = rememberNavController(),
     viewModel: DoctorDetailViewModel = hiltViewModel(),
-) {
+
+    ) {
     LaunchedEffect(key1 = viewModel) {
         viewModel.fetchDoctor(doctorId)
     }
 
     val uiState = viewModel.uiState
 
+    var message = remember { NotEmptyValidable() }
+    var dateTime = remember { NotEmptyValidable() }
 
-    var message by remember { mutableStateOf("") }
-    var selectedDate by remember { mutableStateOf("") }
+    var showDialogState by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -87,9 +87,14 @@ fun DoctorDetailScreen(
                 .padding(contentPadding)
                 .padding(32.dp)
         ) {
+
             when {
                 uiState.isLoading -> {
                     ProgressLoader()
+                }
+
+                uiState.createdAppointment != null -> {
+
                 }
 
                 uiState.errorMessage != null -> {
@@ -118,9 +123,9 @@ fun DoctorDetailScreen(
                     //Spacer(modifier = Modifier.height(12.dp))
                     Spacer(modifier = Modifier.weight(1f))
                     OutlinedTextField(
-                        value = selectedDate,
+                        value = dateTime.value,
                         onValueChange = {
-                            selectedDate = it
+                            dateTime.value = it
                         },
                         label = { Text(text = "Date et Heure") },
                         modifier = Modifier.fillMaxWidth()
@@ -128,15 +133,15 @@ fun DoctorDetailScreen(
                     Spacer(modifier = Modifier.height(12.dp))
                     // AnimatedVisibility(visible = uiState.doctor.isAvailable) {
                     OutlinedTextField(
-                        value = message,
-                        onValueChange = { if (it.length <= 255) message = it },
+                        value = message.value,
+                        onValueChange = { if (it.length <= 255) message.value = it },
                         label = { Text(text = "Description") },
                         modifier = Modifier
                             .height(150.dp)
                             .fillMaxWidth(),
                         supportingText = {
                             Text(
-                                text = "${message.length} / 255",
+                                text = "${message.value.length} / 255",
                                 modifier = Modifier.fillMaxWidth(),
                                 textAlign = TextAlign.End
                             )
@@ -146,7 +151,9 @@ fun DoctorDetailScreen(
                     // }
                     Spacer(modifier = Modifier.height(10.dp))
                     Button(
-                        onClick = {},
+                        onClick = {
+                            showDialogState = true
+                        },
                         modifier = Modifier.fillMaxWidth(),
                         shape = MaterialTheme.shapes.medium,
                         enabled = uiState.doctor.isAvailable
@@ -158,6 +165,29 @@ fun DoctorDetailScreen(
                         )
                     }
                 }
+            }
+            AppointmentScreen(
+                showDialog = {
+                    showDialogState = true
+                }
+            )
+            if (showDialogState) {
+                ConfirmationDialog(
+                    onConfirm = {
+                        withValidable {
+                            viewModel.createAppointment(doctorId, message.value , dateTime.value)
+                        }
+
+                        message = NotEmptyValidable()
+                        dateTime = NotEmptyValidable()
+
+                        showDialogState = false
+                        navController.popBackStack()
+                    },
+                    onDismiss = {
+                        showDialogState = false
+                    }
+                )
             }
         }
     }
