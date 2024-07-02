@@ -1,6 +1,7 @@
 package tech.devscast.medifax.presentation.screens.doctor
 
 import android.widget.Toast
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -37,9 +39,10 @@ import androidx.navigation.compose.rememberNavController
 import tech.devscast.medifax.presentation.components.EmptyState
 import tech.devscast.medifax.presentation.components.ProgressLoader
 import tech.devscast.medifax.presentation.navigation.BottomNavigationBar
+import tech.devscast.medifax.presentation.navigation.Destination
+import tech.devscast.medifax.presentation.screens.doctor.components.AppointmentConfirmationDialog
+import tech.devscast.medifax.presentation.screens.doctor.components.AppointmentDatePickerDialog
 import tech.devscast.medifax.presentation.screens.doctor.components.DoctorListItem
-import tech.devscast.medifax.presentation.screens.profile.components.AppointmentScreen
-import tech.devscast.medifax.presentation.screens.profile.components.ConfirmationDialog
 import tech.devscast.medifax.presentation.theme.MedifaxTheme
 import tech.devscast.medifax.presentation.theme.poppinsFontFamily
 import tech.devscast.medifax.presentation.viewmodel.DoctorDetailViewModel
@@ -52,19 +55,17 @@ import tech.devscast.validable.withValidable
 fun DoctorDetailScreen(
     doctorId: String,
     navController: NavController = rememberNavController(),
-    viewModel: DoctorDetailViewModel = hiltViewModel(),
-
-    ) {
+    viewModel: DoctorDetailViewModel = hiltViewModel()
+) {
     LaunchedEffect(key1 = viewModel) {
         viewModel.fetchDoctor(doctorId)
     }
 
     val uiState = viewModel.uiState
-
-    var message = remember { NotEmptyValidable() }
-    var dateTime = remember { NotEmptyValidable() }
-
+    val message = remember { NotEmptyValidable() }
+    val dateTime = remember { NotEmptyValidable() }
     var showDialogState by remember { mutableStateOf(false) }
+    var showDatePickerState by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -87,14 +88,13 @@ fun DoctorDetailScreen(
                 .padding(contentPadding)
                 .padding(32.dp)
         ) {
-
             when {
                 uiState.isLoading -> {
                     ProgressLoader()
                 }
 
                 uiState.createdAppointment != null -> {
-
+                    navController.navigate(Destination.Appointment.route)
                 }
 
                 uiState.errorMessage != null -> {
@@ -120,18 +120,23 @@ fun DoctorDetailScreen(
                         modifier = Modifier.fillMaxWidth()
                     )
 
-                    //Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
                     Spacer(modifier = Modifier.weight(1f))
+                    Box(contentAlignment = Alignment.Center) {
+                        Button(onClick = { showDatePickerState = true }) {
+                            Text(text = "réserver une date")
+                        }
+                    }
                     OutlinedTextField(
                         value = dateTime.value,
                         onValueChange = {
                             dateTime.value = it
                         },
                         label = { Text(text = "Date et Heure") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        enabled = false
                     )
                     Spacer(modifier = Modifier.height(12.dp))
-                    // AnimatedVisibility(visible = uiState.doctor.isAvailable) {
                     OutlinedTextField(
                         value = message.value,
                         onValueChange = { if (it.length <= 255) message.value = it },
@@ -147,8 +152,8 @@ fun DoctorDetailScreen(
                             )
                         },
                         shape = MaterialTheme.shapes.medium,
+                        enabled = uiState.doctor.isAvailable
                     )
-                    // }
                     Spacer(modifier = Modifier.height(10.dp))
                     Button(
                         onClick = {
@@ -166,23 +171,22 @@ fun DoctorDetailScreen(
                     }
                 }
             }
-            AppointmentScreen(
-                showDialog = {
-                    showDialogState = true
-                }
-            )
+
+            if (showDatePickerState) {
+                AppointmentDatePickerDialog(
+                    onDateSelected = { dateTime.value = it },
+                    onDismiss = { showDatePickerState = false }
+                )
+            }
+
             if (showDialogState) {
-                ConfirmationDialog(
+                AppointmentConfirmationDialog(
+                    date = dateTime.value,
                     onConfirm = {
-                        withValidable {
-                            viewModel.createAppointment(doctorId, message.value , dateTime.value)
+                        withValidable(message, dateTime) {
+                            viewModel.createAppointment(doctorId, message.value, dateTime.value)
                         }
-
-                        message = NotEmptyValidable()
-                        dateTime = NotEmptyValidable()
-
                         showDialogState = false
-                        navController.popBackStack()
                     },
                     onDismiss = {
                         showDialogState = false
